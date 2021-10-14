@@ -9,14 +9,15 @@
     android:paddingBottom="10dp">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="normal"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:text="ㅇㅇ님을 위한 추천도서"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:text="ㅇㅇ님을 위한 추천도서"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="normal" />
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
@@ -27,138 +28,9 @@
         android:overScrollMode="never">
 
         <LinearLayout
+            android:id="@+id/itemsContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <!--****-->
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ex_book1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="10sp"
-                    android:textColor="#000000"
-                    android:text="비전공자를 위한 이해할 수 있는 IT지식"
-                    android:ems="7"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="7dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ex_book1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="10sp"
-                    android:textColor="#000000"
-                    android:text="비전공자를 위한 이해할 수 있는 IT지식"
-                    android:ems="7"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="7dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ex_book1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="10sp"
-                    android:textColor="#000000"
-                    android:text="비전공자를 위한 이해할 수 있는 IT지식"
-                    android:ems="7"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="7dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ex_book1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="10sp"
-                    android:textColor="#000000"
-                    android:text="비전공자를 위한 이해할 수 있는 IT지식"
-                    android:ems="7"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="7dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginRight="20dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ex_book1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="10sp"
-                    android:textColor="#000000"
-                    android:text="비전공자를 위한 이해할 수 있는 IT지식"
-                    android:ems="7"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="7dp"/>
-            </LinearLayout>
-
-            <!--****-->
-        </LinearLayout>
+            android:orientation="horizontal"/>
     </HorizontalScrollView>
     </LinearLayout>
