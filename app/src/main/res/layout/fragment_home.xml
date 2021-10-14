@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:gravity="center"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -33,13 +34,39 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_search"
-                android:layout_marginRight="20dp"/>
+                android:background="@drawable/ic_search"/>
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"/>
+        android:layout_weight="9"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_borders_banner"
+                android:padding="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ex_book1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/recommendedItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
