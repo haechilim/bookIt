@@ -3,15 +3,16 @@ package com.example.bookit.activity;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.bookit.R;
+import com.example.bookit.activity.fragment.FragmentCommunity;
 import com.example.bookit.activity.fragment.FragmentHome;
+import com.example.bookit.activity.helper.Util;
 
 public class MainActivity extends AppCompatActivity {
-    private FragmentTransaction transaction;
     private FragmentHome fragmentHome;
+    private FragmentCommunity fragmentCommunity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         fragmentHome = new FragmentHome();
+        fragmentCommunity = new FragmentCommunity(this);
 
-        transactionFragment(fragmentHome);
+        Util.transactionFragment(this, fragmentHome);
     }
 
     private void eventsBind() {
-        findViewById(R.id.homeButton).setOnClickListener(v -> transactionFragment(fragmentHome));
-    }
+        findViewById(R.id.homeButton).setOnClickListener(v -> Util.transactionFragment(this, fragmentHome));
 
-    private void transactionFragment(Fragment fragment) {
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayout, fragment).commitAllowingStateLoss();
+        findViewById(R.id.communityButton).setOnClickListener(v -> Util.transactionFragment(this, fragmentCommunity));
     }
 }
