@@ -1,9 +1,10 @@
 package com.example.bookit.activity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
 import com.example.bookit.activity.fragment.FragmentCommunity;
@@ -13,6 +14,11 @@ import com.example.bookit.activity.helper.Util;
 public class MainActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;
     private FragmentCommunity fragmentCommunity;
+    private ImageView icHome;
+    private ImageView icCommunity;
+    private ImageView icReadingDiary;
+    private ImageView icChatting;
+    private ImageView icMy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +32,42 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         fragmentHome = new FragmentHome();
         fragmentCommunity = new FragmentCommunity(this);
+        icHome = findViewById(R.id.icHome);
+        icCommunity = findViewById(R.id.icCommunity);
+        icReadingDiary = findViewById(R.id.icReadingDiary);
+        icChatting = findViewById(R.id.icChatting);
+        icMy = findViewById(R.id.icMy);
 
         Util.transactionFragment(this, R.id.frameLayout, fragmentHome);
     }
 
     private void eventsBind() {
-        findViewById(R.id.homeButton).setOnClickListener(v -> Util.transactionFragment(this, R.id.frameLayout,  fragmentHome));
+        findViewById(R.id.homeButton).setOnClickListener(v -> {
+            Util.transactionFragment(this, R.id.frameLayout,  fragmentHome);
+            selectedHomeButton();
+        });
 
-        findViewById(R.id.communityButton).setOnClickListener(v -> Util.transactionFragment(this, R.id.frameLayout, fragmentCommunity));
+        findViewById(R.id.communityButton).setOnClickListener(v -> {
+            Util.transactionFragment(this, R.id.frameLayout, fragmentCommunity);
+            selectedCommunityButton();
+        });
+    }
+
+    private void resetButtons() {
+        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home));
+        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community));
+        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary));
+        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting));
+        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my));
+    }
+
+    private void selectedHomeButton() {
+        resetButtons();
+        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home_color));
+    }
+
+    private void selectedCommunityButton() {
+        resetButtons();
+        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community_color));
     }
 }
