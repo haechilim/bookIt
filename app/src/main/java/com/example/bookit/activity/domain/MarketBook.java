@@ -3,6 +3,12 @@ package com.example.bookit.activity.domain;
 import java.util.Calendar;
 
 public class MarketBook {
+    public static final int STATUS_BEST = 0;
+    public static final int STATUS_GOOD = 1;
+    public static final int STATUS_AVERAGE = 2;
+    public static final int STATUS_BAD = 3;
+    public static final int STATUS_LOWEST = 4;
+
     private Book book;
     private int status;
     private int price;

@@ -29,12 +29,12 @@ public class FragmentMarket extends Fragment {
         View view = inflater.inflate(R.layout.fragment_market, container, false);
 
         List<MarketBook> marketBookList = new ArrayList<>();
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
-        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 8000));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 1, 10));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 2, 100));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 4, 8999000));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 0, 6000));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 2, 12000));
+        marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 3, 16000));
 
         listView = view.findViewById(R.id.marketList);
         listView.setAdapter(new MarketListAdapter(activity, marketBookList));
