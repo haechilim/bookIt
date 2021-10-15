@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentHome = new FragmentHome();
         fragmentCommunity = new FragmentCommunity(this);
 
-        Util.transactionFragment(this, fragmentHome);
+        Util.transactionFragment(this, R.id.frameLayout, fragmentHome);
     }
 
     private void eventsBind() {
-        findViewById(R.id.homeButton).setOnClickListener(v -> Util.transactionFragment(this, fragmentHome));
+        findViewById(R.id.homeButton).setOnClickListener(v -> Util.transactionFragment(this, R.id.frameLayout,  fragmentHome));
 
-        findViewById(R.id.communityButton).setOnClickListener(v -> Util.transactionFragment(this, fragmentCommunity));
+        findViewById(R.id.communityButton).setOnClickListener(v -> Util.transactionFragment(this, R.id.frameLayout, fragmentCommunity));
     }
 }

@@ -12,6 +12,7 @@ import com.example.bookit.R;
 import com.example.bookit.activity.helper.Util;
 
 public class FragmentCommunity extends Fragment {
+    private View view;
     private FragmentActivity fragmentActivity;
     private FragmentMarket fragmentMarket;
 
@@ -20,13 +21,21 @@ public class FragmentCommunity extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_community, container, false);
+        view = inflater.inflate(R.layout.fragment_community, container, false);
 
-        fragmentMarket = new FragmentMarket();
-
-        Util.transactionFragment(fragmentActivity, fragmentMarket);
-
+        init();
+        bindEvents();
 
         return view;
+    }
+
+    private void init() {
+        fragmentMarket = new FragmentMarket(fragmentActivity);
+
+        //Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentMarket);
+    }
+
+    private void bindEvents() {
+        view.findViewById(R.id.market).setOnClickListener(v -> Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentMarket));
     }
 }
