@@ -18,6 +18,7 @@ public class FragmentCommunity extends Fragment {
     private View view;
     private FragmentActivity fragmentActivity;
     private FragmentMarket fragmentMarket;
+    private FragmentDebate fragmentDebate;
     private TextView debate;
     private TextView market;
 
@@ -35,17 +36,18 @@ public class FragmentCommunity extends Fragment {
     }
 
     private void init() {
+        fragmentDebate = new FragmentDebate(fragmentActivity);
         fragmentMarket = new FragmentMarket(fragmentActivity);
         debate = view.findViewById(R.id.debate);
         market = view.findViewById(R.id.market);
 
-        //Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentMarket);
+        Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentDebate);
         selectedDebateButton();
     }
 
     private void bindEvents() {
         debate.setOnClickListener(v -> {
-            //Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentMarket);
+            Util.transactionFragment(fragmentActivity, R.id.communityFrameLayout, fragmentDebate);
             selectedDebateButton();
         });
 

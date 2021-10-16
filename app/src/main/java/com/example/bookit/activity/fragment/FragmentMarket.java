@@ -19,7 +19,6 @@ import java.util.List;
 
 public class FragmentMarket extends Fragment {
     private Activity activity;
-    private ListView listView;
 
     public FragmentMarket(Activity activity) {
         this.activity = activity;
@@ -36,7 +35,7 @@ public class FragmentMarket extends Fragment {
         marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 2, 12000));
         marketBookList.add(new MarketBook(new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), 3, 16000));
 
-        listView = view.findViewById(R.id.marketList);
+        ListView listView = view.findViewById(R.id.marketList);
         listView.setAdapter(new MarketListAdapter(activity, marketBookList));
 
         return view;
