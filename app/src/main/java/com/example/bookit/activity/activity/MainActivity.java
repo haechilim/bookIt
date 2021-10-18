@@ -1,4 +1,4 @@
-package com.example.bookit.activity;
+package com.example.bookit.activity.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,11 +9,13 @@ import androidx.core.content.ContextCompat;
 import com.example.bookit.R;
 import com.example.bookit.activity.fragment.FragmentCommunity;
 import com.example.bookit.activity.fragment.FragmentHome;
+import com.example.bookit.activity.fragment.FragmentReadingDiary;
 import com.example.bookit.activity.helper.Util;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;
     private FragmentCommunity fragmentCommunity;
+    private FragmentReadingDiary fragmentReadingDiary;
     private ImageView icHome;
     private ImageView icCommunity;
     private ImageView icReadingDiary;
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
         eventsBind();
     }
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         fragmentHome = new FragmentHome();
         fragmentCommunity = new FragmentCommunity(this);
+        fragmentReadingDiary = new FragmentReadingDiary(this);
         icHome = findViewById(R.id.icHome);
         icCommunity = findViewById(R.id.icCommunity);
         icReadingDiary = findViewById(R.id.icReadingDiary);
@@ -51,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
             Util.transactionFragment(this, R.id.frameLayout, fragmentCommunity);
             selectedCommunityButton();
         });
+
+        findViewById(R.id.readingDiaryButton).setOnClickListener(v -> {
+            Util.transactionFragment(this, R.id.frameLayout, fragmentReadingDiary);
+            selectedReadingDiaryButton();
+        });
     }
 
     private void resetButtons() {
@@ -69,5 +76,10 @@ public class MainActivity extends AppCompatActivity {
     private void selectedCommunityButton() {
         resetButtons();
         icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community_color));
+    }
+
+    private void selectedReadingDiaryButton() {
+        resetButtons();
+        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary_color));
     }
 }
