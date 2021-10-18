@@ -5,12 +5,12 @@ import java.util.Calendar;
 public class ReadingDiary {
     private String title;
     private String contents;
-    private Calendar calendar;
+    private Calendar time;
 
     public ReadingDiary(String title, String contents) {
         this.title = title;
         this.contents = contents;
-        this.calendar = Calendar.getInstance();
+        this.time = Calendar.getInstance();
     }
 
     public String getTitle() {
@@ -29,12 +29,12 @@ public class ReadingDiary {
         this.contents = contents;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public Calendar getTime() {
+        return time;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setTime(Calendar time) {
+        this.time = time;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ReadingDiary {
         return "ReadingDiary{" +
                 "title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-                ", calendar=" + calendar +
+                ", calendar=" + time +
                 '}';
     }
 }

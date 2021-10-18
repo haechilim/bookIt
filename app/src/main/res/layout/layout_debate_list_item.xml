@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/layout_border_debate">
+        android:background="@drawable/layout_border_debate"
+        android:elevation="3dp"
+        android:layout_margin="3dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
