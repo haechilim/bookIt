@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
+import com.example.bookit.activity.fragment.FragmentChatting;
 import com.example.bookit.activity.fragment.FragmentCommunity;
 import com.example.bookit.activity.fragment.FragmentHome;
 import com.example.bookit.activity.fragment.FragmentReadingDiary;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;
     private FragmentCommunity fragmentCommunity;
     private FragmentReadingDiary fragmentReadingDiary;
+    private FragmentChatting fragmentChatting;
     private ImageView icHome;
     private ImageView icCommunity;
     private ImageView icReadingDiary;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentHome = new FragmentHome();
         fragmentCommunity = new FragmentCommunity(this);
         fragmentReadingDiary = new FragmentReadingDiary(this);
+        fragmentChatting = new FragmentChatting(this);
         icHome = findViewById(R.id.icHome);
         icCommunity = findViewById(R.id.icCommunity);
         icReadingDiary = findViewById(R.id.icReadingDiary);
@@ -58,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
             Util.transactionFragment(this, R.id.frameLayout, fragmentReadingDiary);
             selectedReadingDiaryButton();
         });
+
+        findViewById(R.id.chattingButton).setOnClickListener(v -> {
+            Util.transactionFragment(this, R.id.frameLayout, fragmentChatting);
+            selectedRChattingButton();
+        });
     }
 
     private void resetButtons() {
@@ -81,5 +89,10 @@ public class MainActivity extends AppCompatActivity {
     private void selectedReadingDiaryButton() {
         resetButtons();
         icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary_color));
+    }
+
+    private void selectedRChattingButton() {
+        resetButtons();
+        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting_color));
     }
 }

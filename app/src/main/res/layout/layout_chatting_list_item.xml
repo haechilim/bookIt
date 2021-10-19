@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_border_chatting_bottom">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ex_book1"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="14dp"/>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="14dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#1c1c1c"
+            android:lineSpacingExtra="6sp"
+            android:lines="1"
+            android:ems="3"
+            android:ellipsize="end"
+            android:text="김선린"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#313131"
+            android:lineSpacingExtra="10sp"
+            android:lines="1"
+            android:ems="7"
+            android:ellipsize="end"
+            android:text="책 잘 받았습니다 감사합니다감사합니다 "/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="right|bottom">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="#feba55"
+            android:layout_marginRight="20dp"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="10sp"
+            android:textColor="#dcdcdc"
+            android:lineSpacingExtra="14sp"
+            android:text="5분 전"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="14dp"/>
+    </LinearLayout>
+</LinearLayout>
