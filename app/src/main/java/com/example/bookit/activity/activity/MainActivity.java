@@ -10,6 +10,7 @@ import com.example.bookit.R;
 import com.example.bookit.activity.fragment.FragmentChatting;
 import com.example.bookit.activity.fragment.FragmentCommunity;
 import com.example.bookit.activity.fragment.FragmentHome;
+import com.example.bookit.activity.fragment.FragmentMy;
 import com.example.bookit.activity.fragment.FragmentReadingDiary;
 import com.example.bookit.activity.helper.Util;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentCommunity fragmentCommunity;
     private FragmentReadingDiary fragmentReadingDiary;
     private FragmentChatting fragmentChatting;
+    private FragmentMy fragmentMy;
     private ImageView icHome;
     private ImageView icCommunity;
     private ImageView icReadingDiary;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentCommunity = new FragmentCommunity(this);
         fragmentReadingDiary = new FragmentReadingDiary(this);
         fragmentChatting = new FragmentChatting(this);
+        fragmentMy = new FragmentMy(this);
         icHome = findViewById(R.id.icHome);
         icCommunity = findViewById(R.id.icCommunity);
         icReadingDiary = findViewById(R.id.icReadingDiary);
@@ -64,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.chattingButton).setOnClickListener(v -> {
             Util.transactionFragment(this, R.id.frameLayout, fragmentChatting);
-            selectedRChattingButton();
+            selectedChattingButton();
+        });
+
+        findViewById(R.id.myButton).setOnClickListener(v -> {
+            Util.transactionFragment(this, R.id.frameLayout, fragmentMy);
+            selectedMyButton();
         });
     }
 
@@ -91,8 +99,13 @@ public class MainActivity extends AppCompatActivity {
         icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary_color));
     }
 
-    private void selectedRChattingButton() {
+    private void selectedChattingButton() {
         resetButtons();
         icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting_color));
+    }
+
+    private void selectedMyButton() {
+        resetButtons();
+        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my_color));
     }
 }
