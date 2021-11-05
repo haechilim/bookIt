@@ -1,6 +1,8 @@
 package com.example.bookit.domain;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private String title;
     private String writer;
     private String isbn;

@@ -1,6 +1,7 @@
 package com.example.bookit.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.bookit.R;
+import com.example.bookit.activity.BookActivity;
 import com.example.bookit.domain.Book;
 
 public class BookView extends LinearLayout {
@@ -44,7 +46,10 @@ public class BookView extends LinearLayout {
         ((TextView)view.findViewById(R.id.title)).setText(book.getTitle());
 
         view.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, BookActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("book", book);
+            context.startActivity(intent);
         });
     }
 }
