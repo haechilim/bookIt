@@ -1,4 +1,4 @@
-package com.example.bookit.activity.fragment;
+package com.example.bookit.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;

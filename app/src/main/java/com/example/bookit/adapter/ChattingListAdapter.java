@@ -1,4 +1,4 @@
-package com.example.bookit.activity.adapter;
+package com.example.bookit.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.domain.ChattingRoom;
+import com.example.bookit.domain.ChattingRoom;
 
 import java.util.List;
 

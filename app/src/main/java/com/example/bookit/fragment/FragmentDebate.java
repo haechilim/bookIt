@@ -1,4 +1,4 @@
-package com.example.bookit.activity.fragment;
+package com.example.bookit.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.adapter.DebateListAdapter;
-import com.example.bookit.activity.domain.Comment;
-import com.example.bookit.activity.domain.Debate;
-import com.example.bookit.activity.domain.User;
+import com.example.bookit.adapter.DebateListAdapter;
+import com.example.bookit.domain.Comment;
+import com.example.bookit.domain.Debate;
+import com.example.bookit.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

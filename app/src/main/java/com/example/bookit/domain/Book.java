@@ -1,4 +1,4 @@
-package com.example.bookit.activity.domain;
+package com.example.bookit.domain;
 
 public class Book {
     private String title;
@@ -11,6 +11,10 @@ public class Book {
         this.writer = writer;
         this.isbn = isbn;
         this.publisher = publisher;
+    }
+
+    public Book(String title) {
+        this.title = title;
     }
 
     public String getTitle() {

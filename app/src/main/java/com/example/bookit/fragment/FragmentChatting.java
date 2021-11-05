@@ -1,4 +1,4 @@
-package com.example.bookit.activity.fragment;
+package com.example.bookit.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.adapter.ChattingListAdapter;
-import com.example.bookit.activity.domain.ChattingRoom;
+import com.example.bookit.adapter.ChattingListAdapter;
+import com.example.bookit.domain.ChattingRoom;
 
 import java.util.ArrayList;
 import java.util.List;

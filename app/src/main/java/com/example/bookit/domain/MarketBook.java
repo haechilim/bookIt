@@ -1,4 +1,4 @@
-package com.example.bookit.activity.domain;
+package com.example.bookit.domain;
 
 import java.util.Calendar;
 

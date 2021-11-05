@@ -1,4 +1,4 @@
-package com.example.bookit.activity.fragment;
+package com.example.bookit.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +10,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
+import com.example.bookit.domain.Book;
+import com.example.bookit.view.BookView;
 
 public class FragmentHome extends Fragment {
-    LinearLayout recommendedItems;
+    private LinearLayout recommendedItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,12 +33,12 @@ public class FragmentHome extends Fragment {
         LinearLayout itemsContainer = recommendedBook.findViewById(R.id.itemsContainer);
 
         ((TextView) recommendedBook.findViewById(R.id.title)).setText(title);
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
-        itemsContainer.addView(inflater.inflate(R.layout.layout_book, itemsContainer, false));
+        itemsContainer.addView(new BookView(getContext(), new Book("비전공자를")));
+        itemsContainer.addView(new BookView(getContext(), new Book("위한")));
+        itemsContainer.addView(new BookView(getContext(), new Book("전공 서적!")));
+        itemsContainer.addView(new BookView(getContext(), new Book("책1")));
+        itemsContainer.addView(new BookView(getContext(), new Book("책2")));
+        itemsContainer.addView(new BookView(getContext(), new Book("책3")));
 
         recommendedItems.addView(recommendedBook);
     }

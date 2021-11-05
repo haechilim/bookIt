@@ -1,4 +1,4 @@
-package com.example.bookit.activity.adapter;
+package com.example.bookit.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.domain.Debate;
+import com.example.bookit.domain.Debate;
 
 import java.util.List;
 

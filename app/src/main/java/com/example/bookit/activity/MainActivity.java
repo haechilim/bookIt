@@ -1,4 +1,4 @@
-package com.example.bookit.activity.activity;
+package com.example.bookit.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.fragment.FragmentChatting;
-import com.example.bookit.activity.fragment.FragmentCommunity;
-import com.example.bookit.activity.fragment.FragmentHome;
-import com.example.bookit.activity.fragment.FragmentMy;
-import com.example.bookit.activity.fragment.FragmentReadingDiary;
-import com.example.bookit.activity.helper.Util;
+import com.example.bookit.fragment.FragmentChatting;
+import com.example.bookit.fragment.FragmentCommunity;
+import com.example.bookit.fragment.FragmentHome;
+import com.example.bookit.fragment.FragmentMy;
+import com.example.bookit.fragment.FragmentReadingDiary;
+import com.example.bookit.helper.Util;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;

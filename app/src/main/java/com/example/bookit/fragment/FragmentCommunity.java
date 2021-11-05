@@ -1,4 +1,4 @@
-package com.example.bookit.activity.fragment;
+package com.example.bookit.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.helper.Util;
+import com.example.bookit.helper.Util;
 
 public class FragmentCommunity extends Fragment {
     private View view;
