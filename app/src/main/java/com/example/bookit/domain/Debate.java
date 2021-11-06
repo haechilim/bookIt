@@ -7,11 +7,11 @@ public class Debate {
     private int category;
     private String title;
     private String contents;
-    private int agree;
-    private int disagree;
+    private boolean agree;
+    private boolean disagree;
     private List<Comment> comments;
 
-    public Debate(User user, int category, String title, String contents, int agree, int disagree) {
+    public Debate(User user, int category, String title, String contents, boolean agree, boolean disagree) {
         this.user = user;
         this.category = category;
         this.title = title;
@@ -20,7 +20,7 @@ public class Debate {
         this.disagree = disagree;
     }
 
-    public Debate(User user, int category, String title, String contents, int agree, int disagree, List<Comment> comments) {
+    public Debate(User user, int category, String title, String contents, boolean agree, boolean disagree, List<Comment> comments) {
         this.user = user;
         this.category = category;
         this.title = title;
@@ -62,19 +62,19 @@ public class Debate {
         this.contents = contents;
     }
 
-    public int getAgree() {
+    public boolean isAgree() {
         return agree;
     }
 
-    public void setAgree(int agree) {
+    public void setAgree(boolean agree) {
         this.agree = agree;
     }
 
-    public int getDisagree() {
+    public boolean isDisagree() {
         return disagree;
     }
 
-    public void setDisagree(int disagree) {
+    public void setDisagree(boolean disagree) {
         this.disagree = disagree;
     }
 

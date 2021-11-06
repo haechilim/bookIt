@@ -29,11 +29,12 @@ public class FragmentDebate extends Fragment {
         View view = inflater.inflate(R.layout.fragment_debate, container, false);
 
         List<Debate> debateList = new ArrayList<>();
-        debateList.add(new Debate(new User(), 1, "aaa", "contents", 11, 2));
-        debateList.add(new Debate(new User(), 1, "aaa", "contents", 11, 2));
-        debateList.add(new Debate(new User(), 1, "aaa", "contents", 11, 2));
-        debateList.add(new Debate(new User(), 1, "aaa", "contents", 11, 2));
-        debateList.add(new Debate(new User(), 1, "aaa", "contents", 11, 2));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User(), 1, "aaa", "contents", false, false));
 
         ListView listView = view.findViewById(R.id.debateList);
         listView.setAdapter(new DebateListAdapter(activity, debateList));

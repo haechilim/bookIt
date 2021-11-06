@@ -47,6 +47,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
@@ -55,6 +56,7 @@
                 android:text="분야:IT 컴퓨터"/>
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
@@ -66,12 +68,13 @@
                 android:layout_marginBottom="4dp"/>
 
             <TextView
+                android:id="@+id/contents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:textSize="14sp"
                 android:textColor="#272727"
-                android:lines="4"
+                android:maxLines="4"
                 android:ellipsize="end"
                 android:text="저는 메타버스가 코로나시대에 정말 좋은 순기능을 발휘할 거 같다고 생각해요 비대면이라는 한계점을 극복해줄 수 있는 좋은 기술이라고 생각해요.다들 어떻게 생각하는지 궁금하네요? 긍정적이신지 저는 메타버스가 코로나시대에 정말 좋은 순기능을 발휘할 거 같다고 생각해요 비대면이라는 한계점을 극복해줄 수 있는 좋은 기술이라고 생각해요.다들 어떻게 생각하는지 궁금하네요? 긍정적이신지 "/>
         </LinearLayout>
@@ -83,19 +86,25 @@
             android:background="@drawable/layout_border_top_bottom">
 
             <TextView
+                android:id="@+id/agree"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textStyle="normal"
-                android:textSize="12sp"
-                android:textColor="#272727"
-                android:text="찬성"
                 android:gravity="center"
-                android:background="@drawable/layout_border_right"
                 android:paddingTop="5dp"
-                android:paddingBottom="5dp"/>
+                android:paddingBottom="5dp"
+                android:text="찬성"
+                android:textColor="#272727"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_border_right"/>
 
             <TextView
+                android:id="@+id/disagree"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

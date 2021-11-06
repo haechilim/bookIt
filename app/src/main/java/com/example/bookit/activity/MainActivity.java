@@ -1,7 +1,10 @@
 package com.example.bookit.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -20,11 +23,18 @@ public class MainActivity extends AppCompatActivity {
     private FragmentReadingDiary fragmentReadingDiary;
     private FragmentChatting fragmentChatting;
     private FragmentMy fragmentMy;
+
     private ImageView icHome;
     private ImageView icCommunity;
     private ImageView icReadingDiary;
     private ImageView icChatting;
     private ImageView icMy;
+
+    private LinearLayout frameHome;
+    private LinearLayout frameCommunity;
+    private LinearLayout frameReadingDiary;
+    private LinearLayout frameChatting;
+    private LinearLayout frameMy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,49 +50,80 @@ public class MainActivity extends AppCompatActivity {
         fragmentReadingDiary = new FragmentReadingDiary(this);
         fragmentChatting = new FragmentChatting(this);
         fragmentMy = new FragmentMy(this);
+
         icHome = findViewById(R.id.icHome);
         icCommunity = findViewById(R.id.icCommunity);
         icReadingDiary = findViewById(R.id.icReadingDiary);
         icChatting = findViewById(R.id.icChatting);
         icMy = findViewById(R.id.icMy);
 
-        Util.transactionFragment(this, R.id.frameLayout, fragmentHome);
+        frameHome = findViewById(R.id.frameHome);
+        frameCommunity = findViewById(R.id.frameCommunity);
+        frameReadingDiary = findViewById(R.id.frameReadingDiary);
+        frameChatting = findViewById(R.id.frameChatting);
+        frameMy = findViewById(R.id.frameMy);
+
+        Util.transactionFragment(this, R.id.frameHome, fragmentHome);
+        Util.transactionFragment(this, R.id.frameCommunity, fragmentCommunity);
+        Util.transactionFragment(this, R.id.frameReadingDiary, fragmentReadingDiary);
+        Util.transactionFragment(this, R.id.frameChatting, fragmentChatting);
+        Util.transactionFragment(this, R.id.frameMy, fragmentMy);
+
+        showFrameHome();
     }
 
     private void eventsBind() {
         findViewById(R.id.homeButton).setOnClickListener(v -> {
-            Util.transactionFragment(this, R.id.frameLayout,  fragmentHome);
+            showFrameHome();
             selectedHomeButton();
         });
 
         findViewById(R.id.communityButton).setOnClickListener(v -> {
-            Util.transactionFragment(this, R.id.frameLayout, fragmentCommunity);
+            showFrameCommunity();
             selectedCommunityButton();
         });
 
         findViewById(R.id.readingDiaryButton).setOnClickListener(v -> {
-            Util.transactionFragment(this, R.id.frameLayout, fragmentReadingDiary);
+            showFrameReadingDiary();
             selectedReadingDiaryButton();
         });
 
         findViewById(R.id.chattingButton).setOnClickListener(v -> {
-            Util.transactionFragment(this, R.id.frameLayout, fragmentChatting);
+            showFrameChatting();
             selectedChattingButton();
         });
 
         findViewById(R.id.myButton).setOnClickListener(v -> {
-            Util.transactionFragment(this, R.id.frameLayout, fragmentMy);
+            showFrameMy();
             selectedMyButton();
         });
     }
 
-    private void resetButtons() {
-        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home));
-        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community));
-        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary));
-        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting));
-        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my));
+    private void showFrameHome() {
+        resetFrames();
+        frameHome.setVisibility(View.VISIBLE);
     }
+
+    private void showFrameCommunity() {
+        resetFrames();
+        frameCommunity.setVisibility(View.VISIBLE);
+    }
+
+    private void showFrameReadingDiary() {
+        resetFrames();
+        frameReadingDiary.setVisibility(View.VISIBLE);
+    }
+
+    private void showFrameChatting() {
+        resetFrames();
+        frameChatting.setVisibility(View.VISIBLE);
+    }
+
+    private void showFrameMy() {
+        resetFrames();
+        frameMy.setVisibility(View.VISIBLE);
+    }
+
 
     private void selectedHomeButton() {
         resetButtons();
@@ -107,5 +148,21 @@ public class MainActivity extends AppCompatActivity {
     private void selectedMyButton() {
         resetButtons();
         icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my_color));
+    }
+
+    private void resetButtons() {
+        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home));
+        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community));
+        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary));
+        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting));
+        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my));
+    }
+
+    private void resetFrames() {
+        frameHome.setVisibility(View.INVISIBLE);
+        frameCommunity.setVisibility(View.INVISIBLE);
+        frameReadingDiary.setVisibility(View.INVISIBLE);
+        frameChatting.setVisibility(View.INVISIBLE);
+        frameMy.setVisibility(View.INVISIBLE);
     }
 }
