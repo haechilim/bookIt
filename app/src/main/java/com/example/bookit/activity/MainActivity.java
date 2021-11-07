@@ -150,19 +150,19 @@ public class MainActivity extends AppCompatActivity {
         icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my_color));
     }
 
-    private void resetButtons() {
-        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home));
-        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community));
-        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary));
-        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting));
-        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my));
-    }
-
     private void resetFrames() {
         frameHome.setVisibility(View.INVISIBLE);
         frameCommunity.setVisibility(View.INVISIBLE);
         frameReadingDiary.setVisibility(View.INVISIBLE);
         frameChatting.setVisibility(View.INVISIBLE);
         frameMy.setVisibility(View.INVISIBLE);
+    }
+
+    private void resetButtons() {
+        icHome.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_home));
+        icCommunity.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_community));
+        icReadingDiary.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_reading_diary));
+        icChatting.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_chatting));
+        icMy.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_my));
     }
 }
