@@ -21,6 +21,7 @@ public class UserView extends LinearLayout {
 
     public UserView(Context context, User user) {
         super(context);
+
         this.context = context;
         this.user = user;
 
@@ -46,7 +47,10 @@ public class UserView extends LinearLayout {
         ((TextView)view.findViewById(R.id.name)).setText(user.getName());
 
         view.setOnClickListener(v -> {
-            Log.d("haechilim", user.toString());
+            /*TODO Intent intent = new Intent(context, BookDetailActivity.class); 유저 상세 페이지 생성시 확인
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("user", user);
+            context.startActivity(intent);*/
         });
     }
 }

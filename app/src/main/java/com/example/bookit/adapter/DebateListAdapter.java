@@ -2,10 +2,8 @@ package com.example.bookit.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.DeadObjectException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bookit.R;
+import com.example.bookit.activity.BookDetailActivity;
+import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
 
 import java.util.List;
@@ -50,13 +51,15 @@ public class DebateListAdapter extends BaseAdapter {
         TextView agree = view.findViewById(R.id.agree);
         TextView disagree = view.findViewById(R.id.disagree);
 
-        newDebate(view, agree, disagree, debate);
-        bindEvents(debate, agree, disagree);
+        initDebate(view, debate, agree, disagree);
+        bindEvents(view, debate, agree, disagree);
 
         return view;
     }
 
-    private void bindEvents(Debate debate, TextView agree, TextView disagree) {
+    private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
+        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "user", debate));
+
         agree.setOnClickListener(v -> {
             resetVote(disagree);
             clickVote(agree);
@@ -72,7 +75,7 @@ public class DebateListAdapter extends BaseAdapter {
         });
     }
 
-    private void newDebate(View view, TextView agree, TextView disagree, Debate debate) {
+    private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
         ((TextView)view.findViewById(R.id.title)).setText(debate.getTitle());
         ((TextView)view.findViewById(R.id.contents)).setText(debate.getContents());

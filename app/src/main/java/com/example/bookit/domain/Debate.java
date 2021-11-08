@@ -1,8 +1,9 @@
 package com.example.bookit.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Debate {
+public class Debate implements Serializable {
     private User user;
     private int category;
     private String title;

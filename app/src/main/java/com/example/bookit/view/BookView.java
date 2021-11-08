@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.example.bookit.R;
 import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.domain.Book;
+import com.example.bookit.helper.Util;
 
 public class BookView extends LinearLayout {
     private Context context;
@@ -45,11 +46,6 @@ public class BookView extends LinearLayout {
 
         ((TextView)view.findViewById(R.id.title)).setText(book.getTitle());
 
-        view.setOnClickListener(v -> {
-            Intent intent = new Intent(context, BookDetailActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("book", book);
-            context.startActivity(intent);
-        });
+        view.setOnClickListener(v -> Util.startActivity(context, BookDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "book", book));
     }
 }
