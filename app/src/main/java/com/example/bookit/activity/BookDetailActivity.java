@@ -4,19 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Book;
 
-public class BookActivity extends AppCompatActivity {
+public class BookDetailActivity extends AppCompatActivity {
     private Book book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView (R.layout.activity_book);
+        setContentView (R.layout.activity_book_detail);
         init();
         eventsBind();
     }

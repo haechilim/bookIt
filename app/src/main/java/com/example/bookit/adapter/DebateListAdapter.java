@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.view.UserView;
 
 import java.util.List;
 
@@ -49,21 +51,25 @@ public class DebateListAdapter extends BaseAdapter {
         TextView disagree = view.findViewById(R.id.disagree);
 
         newDebate(view, agree, disagree, debate);
+        bindEvents(debate, agree, disagree);
 
+        return view;
+    }
+
+    private void bindEvents(Debate debate, TextView agree, TextView disagree) {
         agree.setOnClickListener(v -> {
             resetVote(disagree);
             clickVote(agree);
             debate.setAgree(true);
             debate.setDisagree(false);
         });
+
         disagree.setOnClickListener(v -> {
             resetVote(agree);
             clickVote(disagree);
             debate.setAgree(false);
             debate.setDisagree(true);
         });
-
-        return view;
     }
 
     private void newDebate(View view, TextView agree, TextView disagree, Debate debate) {
@@ -73,6 +79,8 @@ public class DebateListAdapter extends BaseAdapter {
 
         if(debate.isAgree()) clickVote(agree);
         else if(debate.isDisagree()) clickVote(disagree);
+
+        ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser()));
     }
 
     private void clickVote(TextView view) {
