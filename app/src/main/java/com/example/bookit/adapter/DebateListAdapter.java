@@ -15,6 +15,7 @@ import com.example.bookit.R;
 import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.helper.DebateManager;
 import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
 
@@ -58,21 +59,9 @@ public class DebateListAdapter extends BaseAdapter {
     }
 
     private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
-        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "user", debate));
+        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
 
-        agree.setOnClickListener(v -> {
-            resetVote(disagree);
-            clickVote(agree);
-            debate.setAgree(true);
-            debate.setDisagree(false);
-        });
-
-        disagree.setOnClickListener(v -> {
-            resetVote(agree);
-            clickVote(disagree);
-            debate.setAgree(false);
-            debate.setDisagree(true);
-        });
+        DebateManager.clickEvents(debate, agree, disagree);
     }
 
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
@@ -80,19 +69,10 @@ public class DebateListAdapter extends BaseAdapter {
         ((TextView)view.findViewById(R.id.title)).setText(debate.getTitle());
         ((TextView)view.findViewById(R.id.contents)).setText(debate.getContents());
 
-        if(debate.isAgree()) clickVote(agree);
-        else if(debate.isDisagree()) clickVote(disagree);
+        if(debate.isAgree()) DebateManager.clickVote(agree);
+        else if(debate.isDisagree()) DebateManager.clickVote(disagree);
 
-        ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser()));
-    }
-
-    private void clickVote(TextView view) {
-        view.setTextColor(Color.rgb(0xff, 0xff, 0xff));
-        view.setBackgroundColor(Color.rgb(0xff, 0xd7, 0x9c));
-    }
-
-    private void resetVote(TextView view) {
-        view.setTextColor(Color.rgb(0x00, 0x00, 0x00));
-        view.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
+        ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser(), false));
+        //TODO 메인 댓글 표시
     }
 }

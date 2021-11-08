@@ -7,8 +7,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImage"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_community_color"/>
 
@@ -17,10 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="#292929"
-        android:text="김유진"
+        android:textSize="24sp"
+        android:textColor="#272727"
+        android:text="이지은"
         android:layout_gravity="center"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginRight="7dp"/>
 </LinearLayout>

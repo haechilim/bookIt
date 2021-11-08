@@ -1,9 +1,7 @@
 package com.example.bookit.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,20 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.bookit.R;
-import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.domain.User;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserView extends LinearLayout {
     private Context context;
     private User user;
 
-    public UserView(Context context, User user) {
+    public UserView(Context context, User user, boolean isBig) {
         super(context);
 
         this.context = context;
         this.user = user;
 
-        init();
+        init(isBig);
     }
 
     public UserView(Context context, @Nullable AttributeSet attrs) {
@@ -40,11 +39,14 @@ public class UserView extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    private void init() {
+    private void init(boolean isBig) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.layout_user, this, true);
+        View view = layoutInflater.inflate(isBig ? R.layout.layout_user_big : R.layout.layout_user, this, true);
+        CircleImageView profileImage = view.findViewById(R.id.profileImage);
+        TextView name = view.findViewById(R.id.name);
 
-        ((TextView)view.findViewById(R.id.name)).setText(user.getName());
+        //TODO 프로필 이미지 교체
+        name.setText(user.getName());
 
         view.setOnClickListener(v -> {
             /*TODO Intent intent = new Intent(context, BookDetailActivity.class); 유저 상세 페이지 생성시 확인
