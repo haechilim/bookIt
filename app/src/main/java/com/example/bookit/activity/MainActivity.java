@@ -1,20 +1,24 @@
 package com.example.bookit.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
+import com.example.bookit.adapter.DebateListAdapter;
 import com.example.bookit.fragment.FragmentChatting;
 import com.example.bookit.fragment.FragmentCommunity;
 import com.example.bookit.fragment.FragmentHome;
 import com.example.bookit.fragment.FragmentMy;
 import com.example.bookit.fragment.FragmentReadingDiary;
+import com.example.bookit.helper.DebateManager;
 import com.example.bookit.helper.Util;
 
 public class MainActivity extends AppCompatActivity {

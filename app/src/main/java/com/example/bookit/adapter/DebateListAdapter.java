@@ -3,7 +3,6 @@ package com.example.bookit.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,20 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookit.R;
-import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Debate;
 import com.example.bookit.helper.DebateManager;
 import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
 
+import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
-public class DebateListAdapter extends BaseAdapter {
+public class DebateListAdapter extends BaseAdapter implements Serializable {
     private Activity activity;
     private List<Debate> debateList;
 
@@ -53,13 +55,28 @@ public class DebateListAdapter extends BaseAdapter {
         TextView disagree = view.findViewById(R.id.disagree);
 
         initDebate(view, debate, agree, disagree);
-        bindEvents(view, debate, agree, disagree);
+        bindEvents(view, debate, position, agree, disagree);
 
         return view;
     }
 
-    private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
-        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
+    public void updateItem(int position) {
+        if(position < 0 || position >= debateList.size()) return;
+
+        Debate debate = debateList.get(position);
+        View view = (View)getItem(position);
+        TextView agree = view.findViewById(R.id.agree);
+        TextView disagree = view.findViewById(R.id.disagree);
+
+        initDebate(view, debate, agree, disagree);
+    }
+
+    private void bindEvents(View view, Debate debate, int position, TextView agree, TextView disagree) {
+        view.setOnClickListener(v -> {
+            DebateManager.agree = agree;
+            DebateManager.disagree = disagree;
+            Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate);
+        });
 
         DebateManager.clickEvents(debate, agree, disagree);
     }

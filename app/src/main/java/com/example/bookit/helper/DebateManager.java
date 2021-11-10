@@ -6,12 +6,27 @@ import android.widget.TextView;
 import com.example.bookit.domain.Debate;
 
 public class DebateManager {
+    public static TextView agree;
+    public static TextView disagree;
+
+    public static void changeVote(boolean isAgree) {
+        if(agree == null || disagree == null) return;
+
+        resetVote(agree);
+        resetVote(disagree);
+
+        if(isAgree) clickVote(agree);
+        else clickVote(disagree);
+    }
+
     public static void clickEvents(Debate debate, TextView agree, TextView disagree) {
         agree.setOnClickListener(v -> {
             resetVote(disagree);
             clickVote(agree);
             debate.setAgree(true);
             debate.setDisagree(false);
+
+            changeVote(true);
         });
 
         disagree.setOnClickListener(v -> {
@@ -19,6 +34,8 @@ public class DebateManager {
             clickVote(disagree);
             debate.setAgree(false);
             debate.setDisagree(true);
+
+            changeVote(true);
         });
     }
 

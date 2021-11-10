@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.bookit.R;
+import com.example.bookit.adapter.DebateListAdapter;
 import com.example.bookit.helper.Util;
 
 public class FragmentCommunity extends Fragment {
