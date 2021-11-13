@@ -14,6 +14,12 @@ public class Util {
         activity.getSupportFragmentManager().beginTransaction().replace(id, fragment).commitAllowingStateLoss();
     }
 
+    public static void startActivity(Context context, Class target, int flag) {
+        Intent intent = new Intent(context, target);
+        intent.setFlags(flag);
+        context.startActivity(intent);
+    }
+
     public static void startActivity(Context context, Class target, int flag, String name, Serializable object) {
         Intent intent = new Intent(context, target);
         intent.setFlags(flag);
