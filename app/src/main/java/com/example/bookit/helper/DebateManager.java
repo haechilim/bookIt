@@ -1,19 +1,24 @@
 package com.example.bookit.helper;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
+import com.example.bookit.R;
 import com.example.bookit.domain.Debate;
 
 public class DebateManager {
-    public static void clickEvents(Debate debate, TextView agree, TextView disagree) {
-        agree.setOnClickListener(v -> clickVote(debate, agree, disagree, true));
+    public static void clickEvents(Context context, Debate debate, TextView agree, TextView disagree) {
+        agree.setOnClickListener(v -> clickVote(context, debate, agree, disagree, true));
 
-        disagree.setOnClickListener(v -> clickVote(debate, agree, disagree, false));
+        disagree.setOnClickListener(v -> clickVote(context, debate, agree, disagree, false));
     }
 
-    private static void clickVote(Debate debate, TextView agree, TextView disagree, boolean isAgree) {
-        resetVoteButton(isAgree ? disagree : agree);
+    private static void clickVote(Context context, Debate debate, TextView agree, TextView disagree, boolean isAgree) {
+        resetVoteButton(context, isAgree ? disagree : agree);
         clickedVoteButton(isAgree ? agree : disagree);
         debate.setAgree(isAgree);
         debate.setDisagree(!isAgree);
@@ -24,8 +29,8 @@ public class DebateManager {
         view.setBackgroundColor(Color.rgb(0xff, 0xd7, 0x9c));
     }
 
-    public static void resetVoteButton(TextView view) {
+    public static void resetVoteButton(Context context, TextView view) {
         view.setTextColor(Color.rgb(0x00, 0x00, 0x00));
-        view.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
+        view.setBackground(ContextCompat.getDrawable(context, R.drawable.layout_border_top_bottom));
     }
 }

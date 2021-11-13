@@ -60,7 +60,7 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
     private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
         view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
 
-        DebateManager.clickEvents(debate, agree, disagree);
+        DebateManager.clickEvents(activity, debate, agree, disagree);
     }
 
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {

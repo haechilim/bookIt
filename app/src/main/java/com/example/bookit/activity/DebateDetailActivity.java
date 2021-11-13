@@ -14,7 +14,6 @@ import com.example.bookit.view.UserView;
 
 public class DebateDetailActivity extends AppCompatActivity {
     private Debate debate;
-    private int position;
     private TextView agree;
     private TextView disagree;
 
@@ -45,6 +44,6 @@ public class DebateDetailActivity extends AppCompatActivity {
     private void bindEvents() {
         findViewById(R.id.back).setOnClickListener(v -> finish());
 
-        DebateManager.clickEvents(debate, agree, disagree);
+        DebateManager.clickEvents(this, debate, agree, disagree);
     }
 }
