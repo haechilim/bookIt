@@ -6,45 +6,25 @@ import android.widget.TextView;
 import com.example.bookit.domain.Debate;
 
 public class DebateManager {
-    public static TextView agree;
-    public static TextView disagree;
-
-    public static void changeVote(boolean isAgree) {
-        if(agree == null || disagree == null) return;
-
-        resetVote(agree);
-        resetVote(disagree);
-
-        if(isAgree) clickVote(agree);
-        else clickVote(disagree);
-    }
-
     public static void clickEvents(Debate debate, TextView agree, TextView disagree) {
-        agree.setOnClickListener(v -> {
-            resetVote(disagree);
-            clickVote(agree);
-            debate.setAgree(true);
-            debate.setDisagree(false);
+        agree.setOnClickListener(v -> clickVote(debate, agree, disagree, true));
 
-            changeVote(true);
-        });
-
-        disagree.setOnClickListener(v -> {
-            resetVote(agree);
-            clickVote(disagree);
-            debate.setAgree(false);
-            debate.setDisagree(true);
-
-            changeVote(true);
-        });
+        disagree.setOnClickListener(v -> clickVote(debate, agree, disagree, false));
     }
 
-    public static void clickVote(TextView view) {
+    private static void clickVote(Debate debate, TextView agree, TextView disagree, boolean isAgree) {
+        resetVoteButton(isAgree ? disagree : agree);
+        clickedVoteButton(isAgree ? agree : disagree);
+        debate.setAgree(isAgree);
+        debate.setDisagree(!isAgree);
+    }
+
+    public static void clickedVoteButton(TextView view) {
         view.setTextColor(Color.rgb(0xff, 0xff, 0xff));
         view.setBackgroundColor(Color.rgb(0xff, 0xd7, 0x9c));
     }
 
-    public static void resetVote(TextView view) {
+    public static void resetVoteButton(TextView view) {
         view.setTextColor(Color.rgb(0x00, 0x00, 0x00));
         view.setBackgroundColor(Color.rgb(0xff, 0xff, 0xff));
     }

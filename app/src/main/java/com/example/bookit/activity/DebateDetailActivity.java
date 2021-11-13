@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,9 +14,9 @@ import com.example.bookit.view.UserView;
 
 public class DebateDetailActivity extends AppCompatActivity {
     private Debate debate;
+    private int position;
     private TextView agree;
     private TextView disagree;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +38,8 @@ public class DebateDetailActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.title)).setText(debate.getTitle());
         ((TextView)findViewById(R.id.contents)).setText(debate.getContents());
 
-        if(debate.isAgree()) DebateManager.clickVote(agree);
-        else if(debate.isDisagree()) DebateManager.clickVote(disagree);
+        if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
+        else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
     }
 
     private void bindEvents() {

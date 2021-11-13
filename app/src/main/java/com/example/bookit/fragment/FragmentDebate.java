@@ -30,7 +30,7 @@ public class FragmentDebate extends Fragment {
 
         List<Debate> debateList = new ArrayList<>();
         debateList.add(new Debate(new User("임준형"), 1, "aaa", "contents", false, false));
-        debateList.add(new Debate(new User("임준형"), 1, "aaa", "contents", false, false));
+        debateList.add(new Debate(new User("아이유"), 1, "asasass", "contents", false, false));
         debateList.add(new Debate(new User("임준형"), 1, "aaa", "contents", false, false));
         debateList.add(new Debate(new User("임준형"), 1, "aaa", "contents", false, false));
         debateList.add(new Debate(new User("임준형"), 1, "aaa", "contents", false, false));

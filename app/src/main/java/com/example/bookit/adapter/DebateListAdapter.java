@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.bookit.R;
 import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Debate;
@@ -20,7 +18,6 @@ import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.List;
 
 public class DebateListAdapter extends BaseAdapter implements Serializable {
@@ -55,39 +52,25 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         TextView disagree = view.findViewById(R.id.disagree);
 
         initDebate(view, debate, agree, disagree);
-        bindEvents(view, debate, position, agree, disagree);
+        bindEvents(view, debate, agree, disagree);
 
         return view;
     }
 
-    public void updateItem(int position) {
-        if(position < 0 || position >= debateList.size()) return;
-
-        Debate debate = debateList.get(position);
-        View view = (View)getItem(position);
-        TextView agree = view.findViewById(R.id.agree);
-        TextView disagree = view.findViewById(R.id.disagree);
-
-        initDebate(view, debate, agree, disagree);
-    }
-
-    private void bindEvents(View view, Debate debate, int position, TextView agree, TextView disagree) {
-        view.setOnClickListener(v -> {
-            DebateManager.agree = agree;
-            DebateManager.disagree = disagree;
-            Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate);
-        });
+    private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
+        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
 
         DebateManager.clickEvents(debate, agree, disagree);
     }
 
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
+        ((TextView)view.findViewById(R.id.name)).setText(debate.getUser().getName());
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
         ((TextView)view.findViewById(R.id.title)).setText(debate.getTitle());
         ((TextView)view.findViewById(R.id.contents)).setText(debate.getContents());
 
-        if(debate.isAgree()) DebateManager.clickVote(agree);
-        else if(debate.isDisagree()) DebateManager.clickVote(disagree);
+        if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
+        else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
 
         ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser(), false));
         //TODO 메인 댓글 표시
