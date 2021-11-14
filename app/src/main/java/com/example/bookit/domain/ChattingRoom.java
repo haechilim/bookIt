@@ -1,38 +1,39 @@
 package com.example.bookit.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ChattingRoom {
-    private String name;
-    private String message;
+public class ChattingRoom implements Serializable {
+    private User user;
+    private String lastMessage;
     private Calendar time;
 
-    public ChattingRoom(String name, String message, Calendar time) {
-        this.name = name;
-        this.message = message;
+    public ChattingRoom(User user, String lastMessage, Calendar time) {
+        this.user = user;
+        this.lastMessage = lastMessage;
         this.time = time;
     }
 
-    public ChattingRoom(String name, String message) {
-        this.name = name;
-        this.message = message;
+    public ChattingRoom(User user, String lastMessage) {
+        this.user = user;
+        this.lastMessage = lastMessage;
         this.time = Calendar.getInstance();
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getMessage() {
-        return message;
+    public String getLastMessage() {
+        return lastMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 
     public Calendar getTime() {
@@ -46,8 +47,8 @@ public class ChattingRoom {
     @Override
     public String toString() {
         return "ChattingRoom{" +
-                "name='" + name + '\'' +
-                ", message='" + message + '\'' +
+                "user=" + user +
+                ", lastMessage='" + lastMessage + '\'' +
                 ", time=" + time +
                 '}';
     }

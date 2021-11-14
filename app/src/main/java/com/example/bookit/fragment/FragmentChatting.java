@@ -10,7 +10,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
-import com.example.bookit.adapter.ChattingListAdapter;
+import com.example.bookit.adapter.ChattingRoomListAdapter;
 import com.example.bookit.domain.ChattingRoom;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class FragmentChatting extends Fragment {
         chattingRoomList.add(new ChattingRoom("독서왕", "저도 그렇게 생각해요^^"));
 
         ListView listView = view.findViewById(R.id.chattingList);
-        listView.setAdapter(new ChattingListAdapter(activity, chattingRoomList));
+        listView.setAdapter(new ChattingRoomListAdapter(activity, chattingRoomList));
 
         return view;
     }
