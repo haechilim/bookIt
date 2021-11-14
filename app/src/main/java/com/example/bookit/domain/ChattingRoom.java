@@ -2,22 +2,32 @@ package com.example.bookit.domain;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 public class ChattingRoom implements Serializable {
     private User user;
     private String lastMessage;
     private Calendar time;
+    private List<Chatting> chattingList;
 
-    public ChattingRoom(User user, String lastMessage, Calendar time) {
+    public ChattingRoom(User user, String lastMessage) {
         this.user = user;
         this.lastMessage = lastMessage;
         this.time = time;
     }
 
-    public ChattingRoom(User user, String lastMessage) {
+    public ChattingRoom(User user, String lastMessage, Calendar time, List<Chatting> chattingList) {
+        this.user = user;
+        this.lastMessage = lastMessage;
+        this.time = time;
+        this.chattingList = chattingList;
+    }
+
+    public ChattingRoom(User user, String lastMessage, List<Chatting> chattingList) {
         this.user = user;
         this.lastMessage = lastMessage;
         this.time = Calendar.getInstance();
+        this.chattingList = chattingList;
     }
 
     public User getUser() {

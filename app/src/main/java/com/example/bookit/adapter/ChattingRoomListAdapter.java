@@ -3,6 +3,7 @@ package com.example.bookit.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,8 @@ public class ChattingRoomListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = ((LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_chatting_list_item, parent, false);
         ChattingRoom chattingRoom = chattingRoomList.get(position);
+        View view = ((LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_chatting_list_room_item, parent, false);
 
         init(view, chattingRoom);
         bindEvents(view, chattingRoom);
@@ -52,7 +53,7 @@ public class ChattingRoomListAdapter extends BaseAdapter {
     }
 
     private void init(View view, ChattingRoom chattingRoom) {
-        ((TextView) view.findViewById(R.id.name)).setText(chattingRoom.getName());
+        ((TextView) view.findViewById(R.id.name)).setText(chattingRoom.getUser().getName());
         ((TextView) view.findViewById(R.id.message)).setText(chattingRoom.getLastMessage());
         //TODO ((TextView) view.findViewById(R.id.time)).setText(chattingRoom.getTime().toTime());
     }
