@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookIt">
-        <activity android:name=".activity.WriteDebateActivity"></activity>
-        <activity android:name=".activity.DebateDetailActivity"></activity>
+        <activity android:name=".activity.WriteReadingDiaryActivity"></activity>
+        <activity android:name=".activity.WriteMarketActivity" />
+        <activity android:name=".activity.WriteDebateActivity" />
+        <activity android:name=".activity.DebateDetailActivity" />
         <activity android:name=".activity.BookDetailActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>

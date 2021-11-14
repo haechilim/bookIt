@@ -3,22 +3,30 @@ package com.example.bookit.domain;
 import java.util.Calendar;
 
 public class MarketBook {
-    public static final int STATUS_BEST = 0;
-    public static final int STATUS_GOOD = 1;
-    public static final int STATUS_AVERAGE = 2;
-    public static final int STATUS_BAD = 3;
-    public static final int STATUS_LOWEST = 4;
+    public static final StatusBook[] STATUS_LIST = {
+            new StatusBook(StatusBook.STATUS_BEST, "최상"),
+            new StatusBook(StatusBook.STATUS_GOOD, "상"),
+            new StatusBook(StatusBook.STATUS_AVERAGE, "중"),
+            new StatusBook(StatusBook.STATUS_BAD, "하"),
+            new StatusBook(StatusBook.STATUS_LOWEST, "최하")
+    };
 
     private Book book;
-    private int status;
+    private StatusBook status;
     private int price;
     private Calendar time;
 
-    public MarketBook(Book book, int status, int price) {
+    public MarketBook(Book book, StatusBook status, int price) {
         this.book = book;
         this.status = status;
         this.price = price;
-        this.time = Calendar.getInstance();
+    }
+
+    public MarketBook(Book book, StatusBook status, int price, Calendar time) {
+        this.book = book;
+        this.status = status;
+        this.price = price;
+        this.time = time;
     }
 
     public Book getBook() {
@@ -29,11 +37,11 @@ public class MarketBook {
         this.book = book;
     }
 
-    public int getStatus() {
+    public StatusBook getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(StatusBook status) {
         this.status = status;
     }
 

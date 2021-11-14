@@ -1,17 +1,21 @@
 package com.example.bookit.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
+import com.example.bookit.activity.WriteReadingDiaryActivity;
 import com.example.bookit.adapter.ReadingDiaryListAdepter;
 import com.example.bookit.domain.ReadingDiary;
+import com.example.bookit.helper.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,13 @@ public class FragmentReadingDiary extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reading_diary, container, false);
 
+        initList(view);
+        bindEvents(view);
+
+        return view;
+    }
+
+    private void initList(View view) {
         List<ReadingDiary> readingDiaryList = new ArrayList<>();
         readingDiaryList.add(new ReadingDiary("트렌코리아", "디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤가"));
         readingDiaryList.add(new ReadingDiary("트렌드코리아", "생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤가 디자이너로서 트렌드를 파악하는 것이 중요하다고"));
@@ -36,7 +47,9 @@ public class FragmentReadingDiary extends Fragment {
 
         ListView listView = view.findViewById(R.id.readingDiaryList);
         listView.setAdapter(new ReadingDiaryListAdepter(activity, readingDiaryList));
+    }
 
-        return view;
+    private void bindEvents(View view) {
+        view.findViewById(R.id.addButton).setOnClickListener(v -> Util.startActivity(activity, WriteReadingDiaryActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }
