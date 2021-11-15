@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookIt">
-        <activity android:name=".activity.ChattingActivity"></activity>
+        <activity android:name=".activity.MarketDetailActivity"></activity>
+        <activity android:name=".activity.ChattingActivity" />
         <activity android:name=".activity.WriteReadingDiaryActivity" />
         <activity android:name=".activity.WriteMarketActivity" />
         <activity android:name=".activity.WriteDebateActivity" />

@@ -1,8 +1,9 @@
 package com.example.bookit.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class MarketBook {
+public class MarketBook implements Serializable {
     public static final StatusBook[] STATUS_LIST = {
             new StatusBook(StatusBook.STATUS_BEST, "최상"),
             new StatusBook(StatusBook.STATUS_GOOD, "상"),
@@ -11,22 +12,33 @@ public class MarketBook {
             new StatusBook(StatusBook.STATUS_LOWEST, "최하")
     };
 
+    private User user;
     private Book book;
     private StatusBook status;
     private int price;
     private Calendar time;
 
-    public MarketBook(Book book, StatusBook status, int price) {
+    public MarketBook(User user, Book book, StatusBook status, int price, Calendar time) {
+        this.user = user;
+        this.book = book;
+        this.status = status;
+        this.price = price;
+        this.time = time;
+    }
+
+    public MarketBook(User user, Book book, StatusBook status, int price) {
+        this.user = user;
         this.book = book;
         this.status = status;
         this.price = price;
     }
 
-    public MarketBook(Book book, StatusBook status, int price, Calendar time) {
-        this.book = book;
-        this.status = status;
-        this.price = price;
-        this.time = time;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Book getBook() {
@@ -61,13 +73,5 @@ public class MarketBook {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        return "MarketBook{" +
-                "book=" + book +
-                ", status=" + status +
-                ", price=" + price +
-                ", time=" + time +
-                '}';
-    }
+
 }

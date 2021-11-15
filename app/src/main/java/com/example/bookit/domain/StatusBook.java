@@ -1,6 +1,8 @@
 package com.example.bookit.domain;
 
-public class StatusBook {
+import java.io.Serializable;
+
+public class StatusBook implements Serializable {
     public static final int STATUS_BEST = 0;
     public static final int STATUS_GOOD = 1;
     public static final int STATUS_AVERAGE = 2;

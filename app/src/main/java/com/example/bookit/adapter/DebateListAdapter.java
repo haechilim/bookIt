@@ -57,12 +57,6 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         return view;
     }
 
-    private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
-        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
-
-        DebateManager.clickEvents(activity, debate, agree, disagree);
-    }
-
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
         ((TextView)view.findViewById(R.id.name)).setText(debate.getUser().getName());
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
@@ -74,5 +68,11 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
 
         ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser(), false));
         //TODO 메인 댓글 표시
+    }
+
+    private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {
+        view.setOnClickListener(v -> Util.startActivity(activity, DebateDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "debate", debate));
+
+        DebateManager.clickEvents(activity, debate, agree, disagree);
     }
 }

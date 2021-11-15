@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_border_bottom_my">
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="〈"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="22dp"
+                android:paddingRight="22dp"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:layout_marginBottom="90dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/userContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="57dp"/>
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textColor="#000000"
+                        android:text="메타버스 새로운 기회"
+                        android:layout_marginBottom="4dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#636363"
+                            android:lineSpacingExtra="8sp"
+                            android:text="상태:최상"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#636363"
+                            android:lineSpacingExtra="8sp"
+                            android:text="20분전" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/contents"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        android:lineSpacingExtra="10sp"
+                        android:text="광화문 교보문고에서 일주일 전에 구매했습니다. 읽다보니 저한텐 다소 어려운 내용이 많아 판매합니다. 20p까지 읽지 않아서 상태는 새상품에 가깝습니다. 원가보다 저렴하게 파니 메타버스에 관심있는 분들은 한 번 쯤 읽어보셔도 좋을 거 같습니다~^^광화문 서울역 직거래 가능하니 연락주세요:)\n\n 에눌은 정중히 사양합니다."
+                    android:layout_marginTop="18dp"/>
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:background="@drawable/layout_shadow_market_detail"
+                android:gravity="center"
+                android:layout_gravity="bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="27dp"
+                    android:textStyle="normal"
+                    android:textSize="19sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="2sp"
+                    android:text="10,000원"
+                    android:layout_marginRight="56dp"/>
+
+                <Button
+                    android:layout_width="164dp"
+                    android:layout_height="37dp"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/layout_button_market_detail"
+                    android:elevation="10dp"
+                    android:text="채팅하기"/>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
