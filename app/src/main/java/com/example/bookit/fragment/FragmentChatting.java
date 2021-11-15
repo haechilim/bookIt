@@ -35,7 +35,11 @@ public class FragmentChatting extends Fragment {
 
     private void initList(View view) {
         List<Chatting> chattings = new ArrayList<>();
-        chattings.add(new Chatting(new User("user"), "message"));
+        User user = new User("user");
+        chattings.add(new Chatting(user, "message"));
+        chattings.add(new Chatting(user, "message2"));
+        chattings.add(new Chatting(user, "테스트"));
+        chattings.add(new Chatting(user, "문자길이 테스트!문자길이 테스트!문자길이 테스트!문자길이 테스트!문자길이 테스트!문자길이 테스트!문자길이 테스트!문자길이 테스트!"));
 
         List<ChattingRoom> chattingRoomList = new ArrayList<>();
         chattingRoomList.add(new ChattingRoom(new User("김선린"), "책 잘 받았습니다 감사합니다.", chattings));

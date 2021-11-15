@@ -54,12 +54,21 @@ public class ChattingRoom implements Serializable {
         this.time = time;
     }
 
+    public List<Chatting> getChattingList() {
+        return chattingList;
+    }
+
+    public void setChattingList(List<Chatting> chattingList) {
+        this.chattingList = chattingList;
+    }
+
     @Override
     public String toString() {
         return "ChattingRoom{" +
                 "user=" + user +
                 ", lastMessage='" + lastMessage + '\'' +
                 ", time=" + time +
+                ", chattingList=" + chattingList +
                 '}';
     }
 }
