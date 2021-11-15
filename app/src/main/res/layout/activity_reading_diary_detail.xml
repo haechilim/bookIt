@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_border_bottom_my">
+
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="〈"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fbfbfb"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="40dp"
+                android:elevation="8dp"
+                android:background="@drawable/layout_frame_reading_diary_detail">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="normal"
+                        android:textSize="18sp"
+                        android:textColor="#000000"
+                        android:text="트렌드코리아 2021"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:id="@+id/option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_reading_diary_detail_option"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/calender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textStyle="normal"
+                    android:textSize="10sp"
+                    android:textColor="#000000"
+                    android:text="2021. 09. 15"
+                    android:layout_marginTop="14dp"/>
+
+                <TextView
+                    android:id="@+id/contents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다. 디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다.디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다.디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다.디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다.디자이너로서 트렌드를 파악하는 것이 중요하다고 생각해서 매년 버전이 나올 때마다 읽고 있다. 트렌드는 어떤지 어떻게 하면 소비자들의 니즈를 파악할 수 있는지에 대해 잘 담고 있는 도서같다.이 책을 통해 알게된 부분은 나의 디자인과 마케팅에 있어 큰 도움이 되고 있다.특히 책의 내용 중 코로나로 인해 비대면이 확대되면서 메타버스와 같은 가상공간이 주목받을 것이라는 내용이 가장 공감이 같다. 코로나로 인해 만나지 못하는 사람들의 욕구를 메타버스로 충족시켜줄 거라는 말이다."
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popupOption"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#4D777777"
+        android:gravity="center_horizontal|bottom"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="289dp"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            android:background="@drawable/layout_frame_reading_diary_detail"
+            android:backgroundTint="#fbfbfb"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="8sp"
+                android:text="독서기록 수정"
+                android:gravity="center"
+                android:background="@drawable/layout_border_bottom_option"/>
+
+            <TextView
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#ff4444"
+                android:lineSpacingExtra="8sp"
+                android:text="삭제"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="289dp"
+            android:layout_height="40dp"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="8sp"
+            android:text="닫기"
+            android:background="@drawable/layout_frame_reading_diary_detail"
+            android:backgroundTint="#fbfbfb"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="42dp"/>
+    </LinearLayout>
+</FrameLayout>

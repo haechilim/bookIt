@@ -1,8 +1,9 @@
 package com.example.bookit.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ReadingDiary {
+public class ReadingDiary implements Serializable {
     private String title;
     private String contents;
     private Calendar time;

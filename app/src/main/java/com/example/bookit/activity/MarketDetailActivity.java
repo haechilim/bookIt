@@ -22,6 +22,7 @@ public class MarketDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_market_detail);
 
         init();
+        bindEvents();
     }
 
     private void init() {
@@ -29,5 +30,9 @@ public class MarketDetailActivity extends AppCompatActivity {
         marketBook = (MarketBook) intent.getSerializableExtra("marketBook");
 
         ((LinearLayout)findViewById(R.id.userContainer)).addView(new UserView(this, marketBook.getUser(), true));
+    }
+
+    private void bindEvents() {
+        findViewById(R.id.back).setOnClickListener(v -> finish());
     }
 }
