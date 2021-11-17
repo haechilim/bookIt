@@ -7,16 +7,16 @@ public class Book implements Serializable {
     private String title;
     private String writer;
     private String publisher;
-    private int category;
-    private String contents;
+    private Category category;
+    private String description;
 
-    public Book(String image, String title, String writer, String publisher, int category, String contents) {
+    public Book(String image, String title, String writer, String publisher, int categoryId, String description) {
         this.image = image;
         this.title = title;
         this.writer = writer;
         this.publisher = publisher;
-        this.category = category;
-        this.contents = contents;
+        this.category = Category.getCategoryById(categoryId);
+        this.description = description;
     }
 
     public Book(String title) {
@@ -55,20 +55,20 @@ public class Book implements Serializable {
         this.publisher = publisher;
     }
 
-    public int getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getContents() {
-        return contents;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Book implements Serializable {
                 ", writer='" + writer + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", category=" + category +
-                ", contents='" + contents + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

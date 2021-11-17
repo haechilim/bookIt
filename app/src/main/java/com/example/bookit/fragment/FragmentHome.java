@@ -18,7 +18,7 @@ import com.example.bookit.view.BookView;
 import java.util.List;
 
 public class FragmentHome extends Fragment {
-    public static final int BOOK_COUNT_PER_LIST = 10;
+    public static final int BOOK_COUNT_PER_LIST = 15;
 
     private LinearLayout recommendedItems;
 
@@ -28,7 +28,7 @@ public class FragmentHome extends Fragment {
 
         recommendedItems = view.findViewById(R.id.recommendedItems);
 
-        addRecommendedContainer(inflater, "ㅇㅇ님을 위한 추천 도서");
+        addRecommendedContainer(inflater, ApiManager.getUser().getName() + "님을 위한 추천 도서");
         addRecommendedContainer(inflater, "베스트 도서");
 
         return view;

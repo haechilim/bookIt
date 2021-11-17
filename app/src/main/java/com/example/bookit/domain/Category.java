@@ -1,7 +1,10 @@
 package com.example.bookit.domain;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
     public static final Category[] CATEGORY_LIST = {
+            new Category(100, "국내도서"),
             new Category(101, "국내도서>소설"),
             new Category(102, "국내도서>시/에세이"),
             new Category(103, "국내도서>예술/대중문화"),
@@ -28,6 +31,7 @@ public class Category {
             new Category(126, "국내도서>건강/뷰티"),
             new Category(128, "국내도서>여행"),
 
+            new Category(200, "외국도서"),
             new Category(201, "외국도서>어린이"),
             new Category(203, "외국도서>ELT/사전"),
             new Category(205, "외국도서>문학"),
@@ -42,6 +46,7 @@ public class Category {
             new Category(216, "외국도서>중국도서"),
             new Category(217, "외국도서>해외주문원서"),
 
+            new Category(300, "음반"),
             new Category(301, "음반>가요"),
             new Category(302, "음반>Pop"),
             new Category(303, "음반>Rock"),
@@ -62,6 +67,7 @@ public class Category {
             new Category(319, "음반>해외구매"),
             new Category(320, "음반>LP"),
 
+            new Category(400, "DVD"),
             new Category(409, "DVD>애니메이션"),
             new Category(411, "DVD>다큐멘터리"),
             new Category(412, "DVD>TV시리즈"),
@@ -72,8 +78,6 @@ public class Category {
             new Category(428, "DVD>블루레이"),
             new Category(429, "DVD>유아동/교육DVD"),
             new Category(430, "DVD>EBS 교육용"),
-
-            new Category(1000, "기타")
     };
 
     private int id;
@@ -82,6 +86,16 @@ public class Category {
     public Category(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static Category getCategoryById(int id) {
+        for(int i = 0; i < CATEGORY_LIST.length; i++) {
+            Category category = CATEGORY_LIST[i];
+
+            if(category.getId() == id) return category;
+        }
+
+        return null;
     }
 
     public int getId() {

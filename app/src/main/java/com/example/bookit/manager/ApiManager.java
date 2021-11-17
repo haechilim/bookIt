@@ -1,9 +1,9 @@
 package com.example.bookit.manager;
 
 import android.util.Log;
-import android.widget.ListView;
 
 import com.example.bookit.domain.Book;
+import com.example.bookit.domain.User;
 import com.example.bookit.helper.AsyncJob;
 
 import org.json.JSONArray;
@@ -22,29 +22,23 @@ import java.util.List;
 
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
+    private static User user = new User(1, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "임준형", "haechilim", "password");
 
     public static void bestSeller(int count, BestSellerCallback callback) {
         request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), (json) -> {
             try {
                 List<Book> booksLit = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
-                JSONObject jsonObject;
 
                 for(int i = 0; i < jsonArray.length(); i++) {
-                    jsonObject = jsonArray.getJSONObject(i);
-                    booksLit.add(new Book(jsonObject.getString("coverSmallUrl"), jsonObject.getString("title"), jsonObject.getString("author"), jsonObject.getString("publisher"), jsonObject.getInt("categoryId"), jsonObject.getString("description")));
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    booksLit.add(new Book(jsonObject.getString("coverLargeUrl"), jsonObject.getString("title"), jsonObject.getString("author"), jsonObject.getString("publisher"), jsonObject.getInt("categoryId"), jsonObject.getString("description")));
                 }
 
                 callback.success(booksLit);
             } catch (JSONException e) {
                 Log.d("haechilim", e.getMessage());
             }
-
-            /*try {
-                callback.success(objectMapper.readValue(json, new TypeReference<Response>() {}).isSuccess());
-            } catch (JsonProcessingException e) {
-                Log.d("haechilim", e.);
-            }*/
         });
     }
 
@@ -314,4 +308,8 @@ public class ApiManager {
     public interface PollListCallback {
         void success(List<Poll> polls);
     }*/
+
+    public static User getUser() {
+        return user;
+    }
 }
