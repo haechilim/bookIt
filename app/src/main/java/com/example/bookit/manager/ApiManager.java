@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,7 +26,7 @@ public class ApiManager {
     private static User user = new User(1, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "임준형", "haechilim", "password");
 
     public static void bestSeller(int count, BestSellerCallback callback) {
-        request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), (json) -> {
+        request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", (json) -> {
             try {
                 List<Book> booksLit = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
@@ -42,13 +43,13 @@ public class ApiManager {
         });
     }
 
-    private static void request(String url, JsonCallback callback) {
+    private static void request(String url, String body, JsonCallback callback) {
         Log.d("haechilim", url);
 
         new AsyncJob<String, Void, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                return request(strings[0]);
+                return request(strings[0], body);
             }
 
             @Override
@@ -58,12 +59,26 @@ public class ApiManager {
         }.execute(url);
     }
 
-    private static String request(String uri) {
+    private static String request(String uri, String body) {
         String result = "";
 
         try {
             URL url = new URL(uri);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
+            if(!body.isEmpty()) {
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json; utf-8");
+
+                Log.d("haechilim", connection.getRequestProperty("Content-Type"));
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(body.getBytes("utf-8"));
+                outputStream.close();
+            }
+
+            connection.connect();
+
             InputStream inputStream = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
