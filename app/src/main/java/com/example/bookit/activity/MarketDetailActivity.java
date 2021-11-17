@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.bookit.R;
-import com.example.bookit.domain.Debate;
 import com.example.bookit.domain.MarketBook;
-import com.example.bookit.helper.DebateManager;
 import com.example.bookit.view.UserView;
 
 public class MarketDetailActivity extends AppCompatActivity {

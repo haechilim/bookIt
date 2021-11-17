@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.bookit.R;
 import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Debate;
-import com.example.bookit.helper.DebateManager;
+import com.example.bookit.manager.DebateManager;
 import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
 

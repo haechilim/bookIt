@@ -5,15 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Book;
+import com.example.bookit.manager.ApiManager;
 import com.example.bookit.view.BookView;
 
+import java.util.List;
+
 public class FragmentHome extends Fragment {
+    public static final int BOOK_COUNT_PER_LIST = 10;
+
     private LinearLayout recommendedItems;
 
     @Override
@@ -33,12 +39,12 @@ public class FragmentHome extends Fragment {
         LinearLayout itemsContainer = recommendedBook.findViewById(R.id.itemsContainer);
 
         ((TextView) recommendedBook.findViewById(R.id.title)).setText(title);
-        itemsContainer.addView(new BookView(getContext(), new Book("비전공자를")));
-        itemsContainer.addView(new BookView(getContext(), new Book("위한")));
-        itemsContainer.addView(new BookView(getContext(), new Book("전공 서적!")));
-        itemsContainer.addView(new BookView(getContext(), new Book("책1")));
-        itemsContainer.addView(new BookView(getContext(), new Book("책2")));
-        itemsContainer.addView(new BookView(getContext(), new Book("책3")));
+
+        ApiManager.bestSeller(BOOK_COUNT_PER_LIST, (bookList) -> {
+            for(int i = 0; i < bookList.size(); i++) {
+                itemsContainer.addView(new BookView(getContext(), bookList.get(i)));
+            }
+        });
 
         recommendedItems.addView(recommendedBook);
     }

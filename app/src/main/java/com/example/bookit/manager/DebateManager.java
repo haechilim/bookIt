@@ -1,4 +1,4 @@
-package com.example.bookit.helper;
+package com.example.bookit.manager;
 
 import android.content.Context;
 import android.graphics.Color;

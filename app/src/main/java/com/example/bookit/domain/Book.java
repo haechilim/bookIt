@@ -3,20 +3,32 @@ package com.example.bookit.domain;
 import java.io.Serializable;
 
 public class Book implements Serializable {
+    private String image;
     private String title;
     private String writer;
-    private String isbn;
     private String publisher;
+    private int category;
+    private String contents;
 
-    public Book(String title, String writer, String isbn, String publisher) {
+    public Book(String image, String title, String writer, String publisher, int category, String contents) {
+        this.image = image;
         this.title = title;
         this.writer = writer;
-        this.isbn = isbn;
         this.publisher = publisher;
+        this.category = category;
+        this.contents = contents;
     }
 
     public Book(String title) {
         this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getTitle() {
@@ -35,14 +47,6 @@ public class Book implements Serializable {
         this.writer = writer;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public String getPublisher() {
         return publisher;
     }
@@ -51,13 +55,31 @@ public class Book implements Serializable {
         this.publisher = publisher;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "image='" + image + '\'' +
+                ", title='" + title + '\'' +
                 ", writer='" + writer + '\'' +
-                ", isbn='" + isbn + '\'' +
                 ", publisher='" + publisher + '\'' +
+                ", category=" + category +
+                ", contents='" + contents + '\'' +
                 '}';
     }
 }

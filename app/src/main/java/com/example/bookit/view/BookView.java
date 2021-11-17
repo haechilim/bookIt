@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.bookit.R;
 import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.domain.Book;
@@ -44,6 +46,7 @@ public class BookView extends LinearLayout {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.layout_book, this, true);
 
+        Glide.with(this).load(book.getImage()).into((ImageView)view.findViewById(R.id.image));
         ((TextView)view.findViewById(R.id.title)).setText(book.getTitle());
 
         view.setOnClickListener(v -> Util.startActivity(context, BookDetailActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "book", book));

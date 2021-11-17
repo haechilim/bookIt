@@ -1,25 +1,24 @@
 package com.example.bookit.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
-import com.example.bookit.adapter.DebateListAdapter;
+import com.example.bookit.domain.Book;
 import com.example.bookit.fragment.FragmentChatting;
 import com.example.bookit.fragment.FragmentCommunity;
 import com.example.bookit.fragment.FragmentHome;
 import com.example.bookit.fragment.FragmentMy;
 import com.example.bookit.fragment.FragmentReadingDiary;
-import com.example.bookit.helper.DebateManager;
 import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         init();
         eventsBind();
     }

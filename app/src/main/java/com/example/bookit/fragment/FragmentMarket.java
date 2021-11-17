@@ -39,12 +39,12 @@ public class FragmentMarket extends Fragment {
 
     private void initList(View view) {
         List<MarketBook> marketBookList = new ArrayList<>();
-        marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 10));
+        /*marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 10));
         marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 100));
         marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 8999000));
         marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 6000));
         marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 12000));
-        marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 16000));
+        marketBookList.add(new MarketBook(new User("임준형"), new Book("비전공자를 위한 이해할 수 있는 IT 지식", "최원영", "9791196918033", "T.W.I.G"), MarketBook.STATUS_LIST[1], 16000));*/
 
         ListView listView = view.findViewById(R.id.marketList);
         listView.setAdapter(new MarketListAdapter(activity, marketBookList));
