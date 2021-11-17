@@ -1,13 +1,20 @@
 package com.example.bookit.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Category;
+import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
+
+import org.w3c.dom.Text;
 
 public class WriteDebateActivity extends AppCompatActivity {
     private Spinner categorySpinner;
@@ -28,5 +35,18 @@ public class WriteDebateActivity extends AppCompatActivity {
 
     private void bindEvents() {
          findViewById(R.id.cancel).setOnClickListener(v -> finish());
+
+         findViewById(R.id.upload).setOnClickListener(v -> {
+             String title = ((EditText)findViewById(R.id.title)).getText().toString();
+             int category = ((Category)categorySpinner.getSelectedItem()).getId();
+             String contents = ((EditText)findViewById(R.id.contents)).getText().toString();
+
+             ApiManager.writeDebate(title, category, contents, isSuccess -> {
+                 if(!isSuccess) return;
+
+                 Util.toast(this, "새로운 독서 토론이 등록 되었습니다.", true);
+                 finish();
+             });
+         });
     }
 }

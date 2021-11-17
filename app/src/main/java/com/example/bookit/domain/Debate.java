@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Debate implements Serializable {
     private User user;
-    private int category;
     private String title;
+    private int category;
     private String contents;
     private boolean agree;
     private boolean disagree;

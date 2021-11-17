@@ -3,6 +3,7 @@ package com.example.bookit.manager;
 import android.util.Log;
 
 import com.example.bookit.domain.Book;
+import com.example.bookit.domain.Debate;
 import com.example.bookit.domain.User;
 import com.example.bookit.helper.AsyncJob;
 
@@ -37,6 +38,16 @@ public class ApiManager {
                 }
 
                 callback.success(booksLit);
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
+
+    public static void writeDebate(String title, int category, String contents, SuccessCallback callback) {
+        request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), (json) -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
                 Log.d("haechilim", e.getMessage());
             }
@@ -105,6 +116,10 @@ public class ApiManager {
 
     public interface BestSellerCallback {
         void success(List<Book> bookList);
+    }
+
+    public interface SuccessCallback {
+        void success(boolean isSuccess);
     }
 
     /*public static void signup(String id, String password, SignupCallback callback) {

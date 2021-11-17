@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Book;
+import com.example.bookit.domain.Debate;
 import com.example.bookit.fragment.FragmentChatting;
 import com.example.bookit.fragment.FragmentCommunity;
 import com.example.bookit.fragment.FragmentHome;
