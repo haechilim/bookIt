@@ -1,5 +1,6 @@
 package com.example.bookit.manager;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -8,6 +9,7 @@ import com.example.bookit.domain.Category;
 import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
 import com.example.bookit.domain.ReadingDiary;
+import com.example.bookit.domain.StatusBook;
 import com.example.bookit.domain.User;
 import com.example.bookit.helper.AsyncJob;
 import com.example.bookit.helper.Util;
@@ -142,6 +144,19 @@ public class ApiManager {
         contents = Util.encode(contents);
 
         request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void writeMarket(String title, Category category, StatusBook status, int price, String contents, SuccessCallback callback) {
+        title = Util.encode(title);
+        contents = Util.encode(contents);
+
+        request(String.format("%s/%s", HOST, "api/write/market"), String.format("userId=%d&title=%s&category=%d&status=%d&price=%d&contents=%s", user.getId(), title, category.getId(), status.getStatus(), price, contents), json -> {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {

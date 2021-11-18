@@ -39,6 +39,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="업로드"
@@ -62,6 +63,7 @@
             android:gravity="center_vertical">
 
             <LinearLayout
+                android:id="@+id/addImage"
                 android:layout_width="114dp"
                 android:layout_height="156dp"
                 android:background="@drawable/layout_border_market_image"
@@ -72,6 +74,24 @@
                     android:layout_height="32dp"
                     android:src="@drawable/ic_add_image"/>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="114dp"
+                android:layout_height="156dp"
+                android:layout_marginLeft="18dp"/>
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="114dp"
+                android:layout_height="156dp"
+                android:layout_marginLeft="18dp"/>
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="114dp"
+                android:layout_height="156dp"
+                android:layout_marginLeft="18dp"/>
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -113,7 +133,8 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:lines="1"
-            android:hint="글 제목"
+            android:inputType="number"
+            android:hint="가격"
             android:textSize="16sp"
             android:background="#efefef"
             android:layout_marginTop="18dp"
