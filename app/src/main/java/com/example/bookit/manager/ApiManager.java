@@ -165,7 +165,6 @@ public class ApiManager {
             try {
                 List<ReadingDiary> readingDiaryList = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
-                Log.d("haechilim", jsonArray.getJSONObject(0).toString());
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -190,6 +189,20 @@ public class ApiManager {
         contents = Util.encode(contents);
 
         request(String.format("%s/%s", HOST, "api/write/readingDiary"), String.format("userId=%d&title=%s&date=%s&contents=%s", user.getId(), title, date, contents), json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void editReadingDiary(int id, String title, String date, String contents, SuccessCallback callback) {
+        title = Util.encode(title);
+        date = Util.encode(date);
+        contents = Util.encode(contents);
+
+        request(String.format("%s/%s", HOST, "api/edit/readingDiary"), String.format("id=%d&title=%s&date=%s&contents=%s", id, title, date, contents), json -> {
             Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));

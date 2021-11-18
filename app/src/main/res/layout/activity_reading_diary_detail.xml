@@ -84,7 +84,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/calender"
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

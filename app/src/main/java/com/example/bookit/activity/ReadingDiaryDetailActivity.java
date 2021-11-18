@@ -10,10 +10,14 @@ import android.widget.TextView;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.ReadingDiary;
+import com.example.bookit.helper.Util;
 
 public class ReadingDiaryDetailActivity extends AppCompatActivity {
     private ReadingDiary readingDiary;
     private LinearLayout popupOption;
+    private static TextView titleView;
+    private static TextView dateView;
+    private static TextView contentsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +31,18 @@ public class ReadingDiaryDetailActivity extends AppCompatActivity {
     private void init() {
         Intent intent = getIntent();
         readingDiary = (ReadingDiary) intent.getSerializableExtra("readingDiary");
-
         popupOption = findViewById(R.id.popupOption);
+        titleView = findViewById(R.id.title);
+        dateView = findViewById(R.id.date);
+        contentsView = findViewById(R.id.contents);
 
-        ((TextView)findViewById(R.id.title)).setText(readingDiary.getTitle());
-        //TODO 시간 ((TextView)findViewById(R.id.title)).setText(readingDiary.getTitle());
-        ((TextView)findViewById(R.id.contents)).setText(readingDiary.getContents());
+        updateReadingDiary(readingDiary.getTitle(), readingDiary.getDate(), readingDiary.getContents());
+    }
+
+    public static void updateReadingDiary(String title, String date, String contents) {
+        titleView.setText(title);
+        dateView.setText(date);
+        contentsView.setText(contents);
     }
 
     private void bindEvents() {
@@ -41,7 +51,8 @@ public class ReadingDiaryDetailActivity extends AppCompatActivity {
         findViewById(R.id.option).setOnClickListener(v -> showPopupOption(true));
 
         findViewById(R.id.edit).setOnClickListener(v -> {
-            //TODO 수정
+            showPopupOption(false);
+            Util.startActivity(this, WriteReadingDiaryActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP, "readingDiary", readingDiary);
         });
 
         findViewById(R.id.delete).setOnClickListener(v -> {
