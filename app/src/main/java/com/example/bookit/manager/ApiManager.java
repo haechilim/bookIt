@@ -31,11 +31,35 @@ import javax.sql.StatementEvent;
 
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
-    private static User user = new User(3, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "준형", "haechilim", "password");
+    private static User user;
+
+    public static void login(String id, String password, LoginCallback callback) {
+        request(String.format("%s/%s?id=%s&password=%s", HOST, "api/login", id, password), "", json -> {
+            try {
+                JSONArray jsonArray = new JSONArray(json);
+
+                if(jsonArray.length() == 0) callback.success(null);
+
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                int uId = jsonObject.getInt("id");
+                String profileImage = jsonObject.getString("profileImage");
+                String name = jsonObject.getString("name");
+                String loginId = jsonObject.getString("loginId");
+                String uPassword = jsonObject.getString("password");
+
+                User user = new User(uId, profileImage, name, loginId, uPassword);
+
+                setUser(user);
+                callback.success(user);
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
 
     public static void signup(String name, String id, String password, SuccessCallback callback) {
         request(String.format("%s/%s?name=%s&id=%s&password=%s", HOST, "api/signup", name, id, password), "", json -> {
-            Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
@@ -203,11 +227,19 @@ public class ApiManager {
         return result;
     }
 
+    public static void setUser(User user) {
+        ApiManager.user = user;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
     private interface JsonCallback {
         void success(String json);
     }
 
-    public interface UserCallback {
+    public interface LoginCallback {
         void success(User user);
     }
 
@@ -221,226 +253,5 @@ public class ApiManager {
 
     public interface SuccessCallback {
         void success(boolean success);
-    }
-
-    /*public static void signup(String id, String password, SignupCallback callback) {
-        request(String.format("%s/%s?loginId=%s&password=%s", HOST, "signup", id, password), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<Response>() {}).isSuccess());
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void login(String loginId, String password, LoginCallback callback) {
-        request(String.format("%s/%s?loginId=%s&password=%s", HOST, "login", loginId, password), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    Response response = objectMapper.readValue(json, new TypeReference<Response>() {});
-                    memberId = response.getMemberId();
-                    callback.success(response.isSuccess());
-                    Logger.debug("memberId: " + memberId);
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void getSchool(SchoolCallback callback) {
-        request(String.format("%s/%s?memberId=%d", HOST, "school", memberId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<School>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void updateSchool(School school) {
-        request(String.format("%s/%s?memberId=%d&name=%s&year=%s&number=%s", HOST, "school/update", memberId,
-                school.getName(), school.getYear(), school.getNumber()), new JsonCallback() {
-            @Override
-            public void success(String json) {}
-        });
-    }
-
-    public static void getStudents(StudentListCallback callback) {
-        request(String.format("%s/%s?memberId=%d", HOST, "student", memberId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<List<Student>>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void addStudent(Student student, StudentCallback callback) {
-        request(String.format("%s/%s?memberId=%d&name=%s&male=%s&phone=%s&avatarId=%d&score=%d&happiness=%d&message=%s",
-                HOST, "student/add", memberId, student.getName(), (student.isMale() ? "true" : "false"), student.getPhone(),
-                student.getAvatarId(), student.getScore(), -1, student.getStatusMessage()), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<Student>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void modifyStudent(Student student, StudentCallback callback) {
-        request(String.format("%s/%s?id=%d&name=%s&male=%s&phone=%s&avatarId=%d&score=%d&happiness=%d&statusMessage=%s",
-                HOST, "student/modify", student.getId(), student.getName(), (student.isMale() ? "true" : "false"), student.getPhone(),
-                student.getAvatarId(), student.getScore(), -1, student.getStatusMessage()), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    if(callback != null) callback.success(objectMapper.readValue(json, new TypeReference<Student>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void deleteStudent(Student student) {
-        request(String.format("%s/%s?id=%d", HOST, "student/delete", student.getId()), new JsonCallback() {
-            @Override
-            public void success(String json) {}
-        });
-    }
-
-    public static void addMate(Student student, Student mate, int roundId) {
-        request(String.format("%s/%s?memberId=%d&studentId=%d&mateId=%d&roundId=%d", HOST, "mate/add",
-                memberId, student.getId(), (mate == null ? -1 : mate.getId()), roundId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                Logger.debug(json);
-            }
-        });
-    }
-
-    public static void addFavoritePartner(Student student, Student mate, int rank) {
-        request(String.format("%s/%s?memberId=&studentId=&mateId=&rank=", HOST, "favorite/add",
-                memberId, student.getId(), mate.getId(), rank), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                Logger.debug(json);
-            }
-        });
-    }
-
-    public static void getRounds(RoundListCallback callback) {
-        request(String.format("%s/%s?memberId=%d", HOST, "round", memberId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                Logger.debug("round: " + json);
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<List<History>>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void addRound(int agree, int disagree, AddRoundCallback callback) {
-        request(String.format("%s/%s?memberId=%d&agree=%d&disagree=%d", HOST, "round/add", memberId, agree, disagree), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<History>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void poll(boolean begin, PollCallback callback) {
-        request(String.format("%s/poll/%s?memberId=%d", HOST, begin ? "begin" : "end", memberId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<Response>() {}).isSuccess());
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static void pollStatus(PollListCallback callback) {
-        request(String.format("%s/%s?memberId=%d", HOST, "poll/status", memberId), new JsonCallback() {
-            @Override
-            public void success(String json) {
-                try {
-                    callback.success(objectMapper.readValue(json, new TypeReference<List<Poll>>() {}));
-                } catch (JsonProcessingException e) {
-                    Logger.debug(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static int getMemberId() {
-        return memberId;
-    }
-
-    public static void setMemberId(int memberId) {
-        com.example.findamate.manager.ApiManager.memberId = memberId;
-    }
-
-    public interface SignupCallback {
-        void success(boolean success);
-    }
-
-    public interface LoginCallback {
-        void success(boolean success);
-    }
-
-    public interface SchoolCallback {
-        void success(School school);
-    }
-
-    public interface StudentListCallback {
-        void success(List<Student> students);
-    }
-
-    public interface StudentCallback {
-        void success(Student student);
-    }
-
-    public interface RoundListCallback {
-        void success(List<History> histories);
-    }
-
-    public interface AddRoundCallback {
-        void success(History history);
-    }
-
-    public interface PollCallback {
-        void success(boolean success);
-    }
-
-    public interface PollListCallback {
-        void success(List<Poll> polls);
-    }*/
-
-    public static User getUser() {
-        return user;
     }
 }
