@@ -39,6 +39,7 @@
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -56,7 +57,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/title"
+            android:id="@+id/inputTitle"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:lines="1"
@@ -67,7 +68,7 @@
             android:paddingLeft="14dp"/>
 
         <EditText
-            android:id="@+id/calender"
+            android:id="@+id/inputDate"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:lines="1"
@@ -79,7 +80,7 @@
             android:paddingLeft="14dp"/>
 
         <EditText
-            android:id="@+id/contents"
+            android:id="@+id/inputContents"
             android:layout_width="match_parent"
             android:layout_height="384dp"
             android:hint="게시글 내용 작성"

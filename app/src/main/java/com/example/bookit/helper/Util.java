@@ -2,16 +2,14 @@ package com.example.bookit.helper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 
 public class Util {
@@ -41,5 +39,15 @@ public class Util {
         calendar.setTimeInMillis(millis);
 
         return calendar;
+    }
+
+    public static String encode(String string) {
+        try {
+            return URLEncoder.encode(string, "utf-8").replace("+", " ");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

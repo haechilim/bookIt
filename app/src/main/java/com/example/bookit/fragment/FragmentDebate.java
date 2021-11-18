@@ -18,7 +18,6 @@ import com.example.bookit.manager.ApiManager;
 
 public class FragmentDebate extends Fragment {
     private static Activity activity;
-    private static DebateListAdapter adapter;
     private static View view;
 
     public FragmentDebate(Activity activity) {
@@ -37,8 +36,7 @@ public class FragmentDebate extends Fragment {
     public static void updateList() {
         ApiManager.getDebates(debateList -> {
             ListView listView = view.findViewById(R.id.debateList);
-            adapter = new DebateListAdapter(activity, debateList);
-            listView.setAdapter(adapter);
+            listView.setAdapter(new DebateListAdapter(activity, debateList));
         });
     }
 

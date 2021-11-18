@@ -16,11 +16,11 @@ import com.example.bookit.helper.Util;
 
 import java.util.List;
 
-public class ReadingDiaryListAdepter extends BaseAdapter {
+public class ReadingDiaryListAdapter extends BaseAdapter {
     private Activity activity;
     private List<ReadingDiary> readingDiaryList;
 
-    public ReadingDiaryListAdepter(Activity activity, List<ReadingDiary> readingDiaryList) {
+    public ReadingDiaryListAdapter(Activity activity, List<ReadingDiary> readingDiaryList) {
         this.activity = activity;
         this.readingDiaryList = readingDiaryList;
     }
@@ -53,8 +53,8 @@ public class ReadingDiaryListAdepter extends BaseAdapter {
 
     private void init(View view, ReadingDiary readingDiary) {
         ((TextView) view.findViewById(R.id.title)).setText(readingDiary.getTitle());
+        ((TextView) view.findViewById(R.id.date)).setText(readingDiary.getDate());
         ((TextView) view.findViewById(R.id.contents)).setText(readingDiary.getContents());
-        //((TextView) view.findViewById(R.id.time)).setText(readingDiary.getTime().toString());
     }
 
     private void bindEvents(View view, ReadingDiary readingDiary) {

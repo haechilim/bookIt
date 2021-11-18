@@ -37,10 +37,18 @@ public class LoginActivity extends AppCompatActivity {
 
             ApiManager.login(id, password, user -> {
                 if(user != null) Util.startActivity(this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                else Util.toast(this, "아이디나 비밀번호가 일치하지 않습니다.", false);
+                else {
+                    initInput();
+                    Util.toast(this, "아이디나 비밀번호가 일치하지 않습니다.", false);
+                }
             });
         });
 
         findViewById(R.id.signup).setOnClickListener(v -> Util.startActivity(this, SignupActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
+
+    private void initInput() {
+        inputId.setText("");
+        inputPassword.setText("");
     }
 }

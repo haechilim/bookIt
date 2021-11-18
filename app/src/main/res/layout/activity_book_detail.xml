@@ -56,6 +56,7 @@
                     android:textColor="#1c1c1c"
                     android:maxEms="13"
                     android:text="메타버스 새로운기회"
+                    android:gravity="center_horizontal"
                     android:layout_marginTop="14dp"/>
 
                 <TextView

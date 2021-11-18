@@ -1,17 +1,26 @@
 package com.example.bookit.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 public class ReadingDiary implements Serializable {
+    private int id;
     private String title;
+    private String date;
     private String contents;
-    private Calendar time;
 
-    public ReadingDiary(String title, String contents) {
+    public ReadingDiary(int id, String title, String date, String contents) {
+        this.id = id;
         this.title = title;
+        this.date = date;
         this.contents = contents;
-        this.time = Calendar.getInstance();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -22,6 +31,14 @@ public class ReadingDiary implements Serializable {
         this.title = title;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getContents() {
         return contents;
     }
@@ -30,20 +47,13 @@ public class ReadingDiary implements Serializable {
         this.contents = contents;
     }
 
-    public Calendar getTime() {
-        return time;
-    }
-
-    public void setTime(Calendar time) {
-        this.time = time;
-    }
-
     @Override
     public String toString() {
         return "ReadingDiary{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", time='" + date + '\'' +
                 ", contents='" + contents + '\'' +
-                ", calendar=" + time +
                 '}';
     }
 }

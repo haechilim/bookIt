@@ -46,13 +46,6 @@ public class WriteDebateActivity extends AppCompatActivity {
              int category = ((Category)categorySpinner.getSelectedItem()).getId();
              String contents = ((EditText)findViewById(R.id.contents)).getText().toString();
 
-             try {
-                 title = URLEncoder.encode(title, "utf-8").replace("+", " ");
-                 contents = URLEncoder.encode(contents, "utf-8").replace("+", " ");
-             } catch (UnsupportedEncodingException e) {
-                 e.printStackTrace();
-             }
-
              ApiManager.writeDebate(title, category, contents, success -> {
                  if(!success) return;
 

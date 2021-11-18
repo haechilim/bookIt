@@ -7,6 +7,7 @@ import com.example.bookit.domain.Book;
 import com.example.bookit.domain.Category;
 import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.domain.ReadingDiary;
 import com.example.bookit.domain.User;
 import com.example.bookit.helper.AsyncJob;
 import com.example.bookit.helper.Util;
@@ -53,7 +54,7 @@ public class ApiManager {
                 setUser(user);
                 callback.success(user);
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
             }
         });
     }
@@ -63,25 +64,10 @@ public class ApiManager {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
             }
         });
     }
-
-    /*public static void getUser(int userId, UserCallback callback) {
-        request(String.format("%s/%s?userId=%d", HOST, "api/user", userId), "", (json) -> {
-            try {
-                JSONObject jsonObject = new JSONArray(json).getJSONObject(0);
-                int id = jsonObject.getInt("id");
-                String profileImage = jsonObject.getString("profileImage");
-                String name = jsonObject.getString("name");
-
-                callback.success(new User(id, profileImage, name));
-            } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
-            }
-        });
-    }*/
 
     public static void bestSeller(int count, BestSellerCallback callback) {
         request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", json -> {
@@ -96,7 +82,7 @@ public class ApiManager {
 
                 callback.success(booksLit);
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
             }
         });
     }
@@ -106,6 +92,7 @@ public class ApiManager {
             try {
                 List<Debate> debateList = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
+                Log.d("haechilim", jsonArray.getJSONObject(0).toString());
 
                 for(int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -135,7 +122,7 @@ public class ApiManager {
                         cContents = jsonObject.getString("cContents");
                         cDate = Util.getCalenderByMillis(jsonObject.getInt("cDate"));
                     } catch (JSONException e) {
-                        Log.d("haechilim", e.getMessage());
+                        e.printStackTrace();
                     }
 
                     List<Comment> commentList = new ArrayList<>();
@@ -145,17 +132,20 @@ public class ApiManager {
 
                 callback.success(debateList);
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
             }
         });
     }
 
     public static void writeDebate(String title, int category, String contents, SuccessCallback callback) {
+        title = Util.encode(title);
+        contents = Util.encode(contents);
+
         request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), json -> {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
             }
         });
     }
@@ -165,7 +155,46 @@ public class ApiManager {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
-                Log.d("haechilim", e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void getReadingDiary(ReadingDiaryCallback callback) {
+        request(String.format("%s/%s?userId=%d", HOST, "api/readingDiary", user.getId()), "", json -> {
+            try {
+                List<ReadingDiary> readingDiaryList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(json);
+                Log.d("haechilim", jsonArray.getJSONObject(0).toString());
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    int id = jsonObject.getInt("id");
+                    String title = jsonObject.getString("title");
+                    String date = jsonObject.getString("date");
+                    String contents = jsonObject.getString("contents");
+
+                    readingDiaryList.add(new ReadingDiary(id, title, date, contents));
+                }
+
+                callback.success(readingDiaryList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void writeReadingDiary(String title, String date, String contents, SuccessCallback callback) {
+        title = Util.encode(title);
+        date = Util.encode(date);
+        contents = Util.encode(contents);
+
+        request(String.format("%s/%s", HOST, "api/write/readingDiary"), String.format("userId=%d&title=%s&date=%s&contents=%s", user.getId(), title, date, contents), json -> {
+            Log.d("haechilim", json);
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -219,9 +248,9 @@ public class ApiManager {
             reader.close();
             connection.disconnect();
         } catch (MalformedURLException e) {
-            Log.d("haechilim", e.getMessage());
+            e.printStackTrace();
         } catch (IOException e) {
-            Log.d("haechilim", e.getMessage());
+            e.printStackTrace();
         }
 
         return result;
@@ -249,6 +278,10 @@ public class ApiManager {
 
     public interface DebateCallback {
         void success(List<Debate> debateList);
+    }
+
+    public interface ReadingDiaryCallback {
+        void success(List<ReadingDiary> readingDiaryList);
     }
 
     public interface SuccessCallback {
