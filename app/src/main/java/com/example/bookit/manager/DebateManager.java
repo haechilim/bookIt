@@ -3,6 +3,7 @@ package com.example.bookit.manager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -18,8 +19,13 @@ public class DebateManager {
     }
 
     private static void clickVote(Context context, Debate debate, TextView agree, TextView disagree, boolean isAgree) {
-        resetVoteButton(context, isAgree ? disagree : agree);
-        clickedVoteButton(isAgree ? agree : disagree);
+        if((isAgree && isAgree == debate.isAgree()) || (!isAgree && !isAgree == debate.isDisagree())) return;
+
+        ApiManager.vote(debate.getId(), isAgree, success -> {
+            resetVoteButton(context, isAgree ? disagree : agree);
+            clickedVoteButton(isAgree ? agree : disagree);
+        });
+
         debate.setAgree(isAgree);
         debate.setDisagree(!isAgree);
     }

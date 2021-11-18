@@ -15,6 +15,18 @@ public class Debate implements Serializable {
     private Calendar calendar;
     private List<Comment> comments;
 
+    public Debate(int id, User user, String title, Category category, String contents, boolean agree, boolean disagree, Calendar calendar, List<Comment> comments) {
+        this.id = id;
+        this.user = user;
+        this.title = title;
+        this.category = category;
+        this.contents = contents;
+        this.agree = agree;
+        this.disagree = disagree;
+        this.calendar = calendar;
+        this.comments = comments;
+    }
+
     public Debate(int id, User user, String title, Category category, String contents, Calendar calendar, List<Comment> comments) {
         this.id = id;
         this.user = user;

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.fragment.FragmentDebate;
 import com.example.bookit.manager.DebateManager;
 import com.example.bookit.view.UserView;
 
@@ -42,7 +43,10 @@ public class DebateDetailActivity extends AppCompatActivity {
     }
 
     private void bindEvents() {
-        findViewById(R.id.back).setOnClickListener(v -> finish());
+        findViewById(R.id.back).setOnClickListener(v -> {
+            FragmentDebate.updateList();
+            finish();
+        });
 
         DebateManager.clickEvents(this, debate, agree, disagree);
     }

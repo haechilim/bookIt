@@ -3,7 +3,6 @@ package com.example.bookit.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,36 +13,31 @@ import androidx.fragment.app.Fragment;
 import com.example.bookit.R;
 import com.example.bookit.activity.WriteDebateActivity;
 import com.example.bookit.adapter.DebateListAdapter;
-import com.example.bookit.domain.Debate;
-import com.example.bookit.domain.User;
 import com.example.bookit.helper.Util;
 import com.example.bookit.manager.ApiManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FragmentDebate extends Fragment {
-    private Activity activity;
+    private static Activity activity;
+    private static DebateListAdapter adapter;
+    private static View view;
 
     public FragmentDebate(Activity activity) {
         this.activity = activity;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_debate, container, false);
+        view = inflater.inflate(R.layout.fragment_debate, container, false);
 
-        initList(view);
+        updateList();
         bindEvents(view);
 
         return view;
     }
 
-    private void initList(View view) {
+    public static void updateList() {
         ApiManager.getDebates(debateList -> {
-            Log.d("haechilim", debateList.toString());
-
             ListView listView = view.findViewById(R.id.debateList);
-            DebateListAdapter adapter = new DebateListAdapter(activity, debateList);
+            adapter = new DebateListAdapter(activity, debateList);
             listView.setAdapter(adapter);
         });
     }

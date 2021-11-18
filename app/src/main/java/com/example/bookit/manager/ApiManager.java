@@ -65,11 +65,10 @@ public class ApiManager {
     }
 
     public static void getDebates(DebateCallback callback) {
-        request(String.format("%s/%s", HOST, "api/debate"), "", (json) -> {
+        request(String.format("%s/%s?userId=%d", HOST, "api/debate", user.getId()), "", (json) -> {
             try {
                 List<Debate> debateList = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
-                Log.d("haechilim", jsonArray.toString());
 
                 for(int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -81,6 +80,7 @@ public class ApiManager {
                     String title = jsonObject.getString("title");
                     Category category = Category.getCategoryById(jsonObject.getInt("categoryId"));
                     String contents = jsonObject.getString("contents");
+                    int vIsAgree = -1;
                     int cId = 0;
                     int cuId = 0;
                     String cuProfileImage = "";
@@ -90,6 +90,7 @@ public class ApiManager {
                     Calendar date = Util.getCalenderByMillis(jsonObject.getInt("date"));
 
                     try {
+                        vIsAgree = jsonObject.getInt("vIsAgree");
                         cId = jsonObject.getInt("cId");
                         cuId = jsonObject.getInt("cuId");
                         cuProfileImage = jsonObject.getString("cuProfileImage");
@@ -102,7 +103,7 @@ public class ApiManager {
 
                     List<Comment> commentList = new ArrayList<>();
                     commentList.add(new Comment(cId, new User(cuId, cuProfileImage, cuName), cContents, cDate));
-                    debateList.add(new Debate(id, new User(uId, uProfileImage, uName), title, category, contents, date, commentList));
+                    debateList.add(new Debate(id, new User(uId, uProfileImage, uName), title, category, contents, vIsAgree == 1, vIsAgree == 0, date, commentList));
                 }
 
                 callback.success(debateList);
@@ -114,6 +115,16 @@ public class ApiManager {
 
     public static void writeDebate(String title, int category, String contents, SuccessCallback callback) {
         request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), (json) -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
+
+    public static void vote(int debateId, boolean isAgree, SuccessCallback callback) {
+        request(String.format("%s/%s?userId=%d&debateId=%d&isAgree=%d", HOST, "api/vote", user.getId(), debateId, isAgree ? 1 : 0), "", (json) -> {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
@@ -196,7 +207,7 @@ public class ApiManager {
     }
 
     public interface SuccessCallback {
-        void success(boolean isSuccess);
+        void success(boolean success);
     }
 
     /*public static void signup(String id, String password, SignupCallback callback) {
