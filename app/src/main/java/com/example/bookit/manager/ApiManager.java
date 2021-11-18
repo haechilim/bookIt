@@ -203,6 +203,16 @@ public class ApiManager {
         contents = Util.encode(contents);
 
         request(String.format("%s/%s", HOST, "api/edit/readingDiary"), String.format("id=%d&title=%s&date=%s&contents=%s", id, title, date, contents), json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void deleteReadingDiary(int id, SuccessCallback callback) {
+        request(String.format("%s/%s?id=%d", HOST, "api/delete/readingDiary", id), "", json -> {
             Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));

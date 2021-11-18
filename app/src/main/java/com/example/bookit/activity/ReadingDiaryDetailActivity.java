@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.example.bookit.R;
 import com.example.bookit.domain.ReadingDiary;
+import com.example.bookit.fragment.FragmentReadingDiary;
 import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
 
 public class ReadingDiaryDetailActivity extends AppCompatActivity {
     private ReadingDiary readingDiary;
@@ -56,7 +58,11 @@ public class ReadingDiaryDetailActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.delete).setOnClickListener(v -> {
-            //TODO 삭제
+            ApiManager.deleteReadingDiary(readingDiary.getId(), success -> {
+                Util.toast(this, "독서기록이 삭제되었습니다.", true);
+                FragmentReadingDiary.updateList();
+                finish();
+            });
         });
 
         findViewById(R.id.cancel).setOnClickListener(v -> showPopupOption(false));
