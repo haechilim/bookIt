@@ -1,7 +1,9 @@
 package com.example.bookit.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentOnAttachListener;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bookit.R;
+import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
 
 public class SignupActivity extends AppCompatActivity {
     public static final int INPUT_MODE_NAME = 0;
@@ -48,8 +52,10 @@ public class SignupActivity extends AppCompatActivity {
         else if(inputMode == INPUT_MODE_ID) inputMode = INPUT_MODE_PASSWORD;
         else if(inputMode == INPUT_MODE_PASSWORD) inputMode = INPUT_MODE_PASSWORD_CHECK;
         else if(inputMode == INPUT_MODE_PASSWORD_CHECK) {
-            //TODO 회원 가입
-            finish();
+            ApiManager.signup(inputs[INPUT_MODE_NAME], inputs[INPUT_MODE_ID], inputs[INPUT_MODE_PASSWORD], success -> {
+                if(success) Util.startActivity(this, SignupCompleatActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                else Util.toast(this, "사용이 불가능한 아이디 입니다.", false);
+            });
         }
 
         init();

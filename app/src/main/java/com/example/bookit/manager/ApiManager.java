@@ -27,11 +27,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.sql.StatementEvent;
+
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
     private static User user = new User(3, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "준형", "haechilim", "password");
-    
-    public static void getUser(int userId, UserCallback callback) {
+
+    public static void signup(String name, String id, String password, SuccessCallback callback) {
+        request(String.format("%s/%s?name=%s&id=%s&password=%s", HOST, "api/signup", name, id, password), "", json -> {
+            Log.d("haechilim", json);
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
+
+    /*public static void getUser(int userId, UserCallback callback) {
         request(String.format("%s/%s?userId=%d", HOST, "api/user", userId), "", (json) -> {
             try {
                 JSONObject jsonObject = new JSONArray(json).getJSONObject(0);
@@ -44,10 +57,10 @@ public class ApiManager {
                 Log.d("haechilim", e.getMessage());
             }
         });
-    }
+    }*/
 
     public static void bestSeller(int count, BestSellerCallback callback) {
-        request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", (json) -> {
+        request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", json -> {
             try {
                 List<Book> booksLit = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
@@ -65,7 +78,7 @@ public class ApiManager {
     }
 
     public static void getDebates(DebateCallback callback) {
-        request(String.format("%s/%s?userId=%d", HOST, "api/debate", user.getId()), "", (json) -> {
+        request(String.format("%s/%s?userId=%d", HOST, "api/debate", user.getId()), "", json -> {
             try {
                 List<Debate> debateList = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
@@ -114,7 +127,7 @@ public class ApiManager {
     }
 
     public static void writeDebate(String title, int category, String contents, SuccessCallback callback) {
-        request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), (json) -> {
+        request(String.format("%s/%s", HOST, "api/write/debate"), String.format("userId=%d&title=%s&category=%d&contents=%s", user.getId(), title, category, contents), json -> {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {
@@ -124,7 +137,7 @@ public class ApiManager {
     }
 
     public static void vote(int debateId, boolean isAgree, SuccessCallback callback) {
-        request(String.format("%s/%s?userId=%d&debateId=%d&isAgree=%d", HOST, "api/vote", user.getId(), debateId, isAgree ? 1 : 0), "", (json) -> {
+        request(String.format("%s/%s?userId=%d&debateId=%d&isAgree=%d", HOST, "api/vote", user.getId(), debateId, isAgree ? 1 : 0), "", json -> {
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {

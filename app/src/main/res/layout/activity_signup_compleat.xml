@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SignupCompleatActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingLeft="70dp"
+    android:paddingRight="70dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:text="가입이 완료되었습니다."
+        android:layout_marginBottom="11dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="14sp"
+        android:textColor="#5e5e5e"
+        android:gravity="center_horizontal"
+        tools:text="로그인하시면 다양한 서비스와 혜택을\n 이용하실 수 있습니다."
+        android:layout_marginBottom="128dp"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="144dp"
+        android:layout_height="40dp"
+        android:textStyle="normal"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="4sp"
+        android:text="로그인"
+        android:background="@drawable/layout_login_button"/>
+</LinearLayout>

@@ -28,6 +28,8 @@
         android:textSize="24sp"
         android:textColor="#707070"
         android:hint="김선린"
+        android:inputType="text"
+        android:maxLines="1"
         android:backgroundTint="#fcdba9"
         android:layout_marginBottom="28dp"/>
 
