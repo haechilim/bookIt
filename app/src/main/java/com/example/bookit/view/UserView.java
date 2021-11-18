@@ -4,11 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.bookit.R;
 import com.example.bookit.domain.User;
 
@@ -45,7 +47,7 @@ public class UserView extends LinearLayout {
         CircleImageView profileImage = view.findViewById(R.id.profileImage);
         TextView name = view.findViewById(R.id.name);
 
-        //TODO 프로필 이미지 교체
+        Glide.with(this).load(user.getProfileImage()).into(profileImage);
         name.setText(user.getName());
 
         view.setOnClickListener(v -> {

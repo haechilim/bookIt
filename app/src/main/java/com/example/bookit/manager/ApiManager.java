@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
-    private static User user = new User(1, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "준형", "haechilim", "password");
+    private static User user = new User(3, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "준형", "haechilim", "password");
 
     public static void getUser(int userId, UserCallback callback) {
         request(String.format("%s/%s?userId=%d", HOST, "api/user", userId), "", (json) -> {
@@ -152,6 +152,7 @@ public class ApiManager {
                 Log.d("haechilim", connection.getRequestProperty("Content-Type"));
 
                 OutputStream outputStream = connection.getOutputStream();
+                Log.d("haechilim", body);
                 outputStream.write(body.getBytes("utf-8"));
                 outputStream.close();
             }

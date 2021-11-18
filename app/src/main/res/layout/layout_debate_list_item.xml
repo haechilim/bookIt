@@ -31,6 +31,7 @@
                 android:layout_marginBottom="8dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:scaleType="centerCrop"
@@ -133,12 +134,13 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/contentsOfComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:textSize="12sp"
                 android:textColor="#292929"
-                android:text="인터넷 윤리만 잘 지켜진다면 큰 문제없을 인터넷 윤리만 잘 지켜진다면 큰 문제없을"
+                android:text="등록된 댓글이 없습니다."
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_gravity="center"/>

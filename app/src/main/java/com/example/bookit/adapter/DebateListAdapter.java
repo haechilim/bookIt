@@ -3,15 +3,19 @@ package com.example.bookit.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bookit.R;
 import com.example.bookit.activity.DebateDetailActivity;
+import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
 import com.example.bookit.manager.DebateManager;
 import com.example.bookit.helper.Util;
@@ -19,6 +23,8 @@ import com.example.bookit.view.UserView;
 
 import java.io.Serializable;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DebateListAdapter extends BaseAdapter implements Serializable {
     private Activity activity;
@@ -58,6 +64,7 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
     }
 
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
+        Glide.with(activity).load(debate.getUser().getProfileImage()).into((CircleImageView)view.findViewById(R.id.profileImage));
         ((TextView)view.findViewById(R.id.name)).setText(debate.getUser().getName());
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
         ((TextView)view.findViewById(R.id.title)).setText(debate.getTitle());
@@ -66,8 +73,11 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
         else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
 
-        ((LinearLayout)view.findViewById(R.id.userContainer)).addView(new UserView(activity, debate.getUser(), false));
-        //TODO 메인 댓글 표시
+        if(!debate.getComments().isEmpty()) {
+            Comment comment = debate.getComments().get(0);
+            ((LinearLayout) view.findViewById(R.id.userContainer)).addView(new UserView(activity, comment.getUser(), false));
+            ((TextView)view.findViewById(R.id.contentsOfComment)).setText(comment.getContents());
+        }
     }
 
     private void bindEvents(View view, Debate debate, TextView agree, TextView disagree) {

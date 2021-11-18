@@ -16,6 +16,9 @@ import com.example.bookit.manager.ApiManager;
 
 import org.w3c.dom.Text;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class WriteDebateActivity extends AppCompatActivity {
     private Spinner categorySpinner;
 
@@ -40,6 +43,13 @@ public class WriteDebateActivity extends AppCompatActivity {
              String title = ((EditText)findViewById(R.id.title)).getText().toString();
              int category = ((Category)categorySpinner.getSelectedItem()).getId();
              String contents = ((EditText)findViewById(R.id.contents)).getText().toString();
+
+             try {
+                 title = URLEncoder.encode(title, "utf-8");
+                 contents = URLEncoder.encode(contents, "utf-8");
+             } catch (UnsupportedEncodingException e) {
+                 e.printStackTrace();
+             }
 
              ApiManager.writeDebate(title, category, contents, isSuccess -> {
                  if(!isSuccess) return;
