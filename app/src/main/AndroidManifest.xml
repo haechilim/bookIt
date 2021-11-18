@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bookit">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -11,10 +11,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BookIt">
-        <activity android:name=".activity.ReadingDiaryDetailActivity"></activity>
+        android:theme="@style/Theme.BookIt"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.SignupActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.ReadingDiaryDetailActivity" />
         <activity android:name=".activity.MarketDetailActivity" />
         <activity android:name=".activity.ChattingActivity" />
         <activity android:name=".activity.WriteReadingDiaryActivity" />
@@ -31,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

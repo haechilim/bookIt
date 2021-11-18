@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/logo_s"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Id"
+            android:maxLines="1"
+            android:textStyle="normal"
+            android:textSize="17sp"
+            android:textColor="#747474"
+            android:background="@drawable/layout_login_edit"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textStyle="normal"
+            android:textSize="17sp"
+            android:textColor="#747474"
+            android:background="@drawable/layout_login_edit"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textStyle="normal"
+            android:textSize="17sp"
+            android:textColor="#ffffff"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:background="@drawable/layout_login_button"
+            android:layout_marginBottom="5dp"
+            android:elevation="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="48dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/layout_border_top_chatting"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="13sp"
+            android:textColor="#707070"
+            tools:text="or"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="37dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/layout_border_top_chatting"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textStyle="normal"
+        android:textSize="17sp"
+        android:textColor="#747474"
+        android:text="회원가입"
+        android:textAllCaps="false"
+        android:background="@drawable/layout_signup_button"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:gravity="center"/>
+</LinearLayout>

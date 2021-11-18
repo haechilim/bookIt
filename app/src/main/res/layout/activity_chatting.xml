@@ -92,7 +92,7 @@
                 android:layout_height="36dp"
                 android:hint="메세지를 입력하세요."
                 android:textSize="14sp"
-                android:background="@drawable/layout_chatting_edit_view"
+                android:background="@drawable/layout_chatting_edit"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
                 android:layout_marginLeft="8dp"
