@@ -1,34 +1,44 @@
 package com.example.bookit.domain;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 public class Debate implements Serializable {
+    private int id;
     private User user;
     private String title;
-    private int category;
+    private Category category;
     private String contents;
     private boolean agree;
     private boolean disagree;
+    private Calendar calendar;
     private List<Comment> comments;
 
-    public Debate(User user, int category, String title, String contents, boolean agree, boolean disagree) {
+    public Debate(int id, User user, String title, Category category, String contents, Calendar calendar, List<Comment> comments) {
+        this.id = id;
         this.user = user;
-        this.category = category;
         this.title = title;
+        this.category = category;
         this.contents = contents;
-        this.agree = agree;
-        this.disagree = disagree;
+        this.calendar = calendar;
+        this.comments = comments;
     }
 
-    public Debate(User user, int category, String title, String contents, boolean agree, boolean disagree, List<Comment> comments) {
+    public Debate(int id, User user, String title, Category category, String contents) {
+        this.id = id;
         this.user = user;
-        this.category = category;
         this.title = title;
+        this.category = category;
         this.contents = contents;
-        this.agree = agree;
-        this.disagree = disagree;
-        this.comments = comments;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public User getUser() {
@@ -39,11 +49,11 @@ public class Debate implements Serializable {
         this.user = user;
     }
 
-    public int getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -90,12 +100,14 @@ public class Debate implements Serializable {
     @Override
     public String toString() {
         return "Debate{" +
-                "user=" + user +
-                ", category=" + category +
+                "id=" + id +
+                ", user=" + user +
                 ", title='" + title + '\'' +
+                ", category=" + category +
                 ", contents='" + contents + '\'' +
                 ", agree=" + agree +
                 ", disagree=" + disagree +
+                ", calendar=" + calendar +
                 ", comments=" + comments +
                 '}';
     }

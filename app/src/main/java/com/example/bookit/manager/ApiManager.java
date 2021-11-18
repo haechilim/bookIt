@@ -1,11 +1,15 @@
 package com.example.bookit.manager;
 
 import android.util.Log;
+import android.widget.ListView;
 
 import com.example.bookit.domain.Book;
+import com.example.bookit.domain.Category;
+import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
 import com.example.bookit.domain.User;
 import com.example.bookit.helper.AsyncJob;
+import com.example.bookit.helper.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,11 +24,27 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
-    private static User user = new User(1, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "임준형", "haechilim", "password");
+    private static User user = new User(1, "https://bimage.interpark.com/partner/goods_image/7/0/6/6/266467066s.jpg", "준형", "haechilim", "password");
+
+    public static void getUser(int userId, UserCallback callback) {
+        request(String.format("%s/%s?userId=%d", HOST, "api/user", userId), "", (json) -> {
+            try {
+                JSONObject jsonObject = new JSONArray(json).getJSONObject(0);
+                int id = jsonObject.getInt("id");
+                String profileImage = jsonObject.getString("profileImage");
+                String name = jsonObject.getString("name");
+
+                callback.success(new User(id, profileImage, name));
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
 
     public static void bestSeller(int count, BestSellerCallback callback) {
         request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", (json) -> {
@@ -38,6 +58,54 @@ public class ApiManager {
                 }
 
                 callback.success(booksLit);
+            } catch (JSONException e) {
+                Log.d("haechilim", e.getMessage());
+            }
+        });
+    }
+
+    public static void getDebates(DebateCallback callback) {
+        request(String.format("%s/%s", HOST, "api/debate"), "", (json) -> {
+            try {
+                List<Debate> debateList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(json);
+                Log.d("haechilim", jsonArray.toString());
+
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    int id = jsonObject.getInt("id");
+                    int uId = jsonObject.getInt("uId");
+                    String uProfileImage = jsonObject.getString("uProfileImage");
+                    String uName = jsonObject.getString("uName");
+                    String title = jsonObject.getString("title");
+                    Category category = Category.getCategoryById(jsonObject.getInt("categoryId"));
+                    String contents = jsonObject.getString("contents");
+                    int cId = 0;
+                    int cuId = 0;
+                    String cuProfileImage = "";
+                    String cuName = "";
+                    String cContents = "";
+                    Calendar cDate = null;
+                    Calendar date = Util.getCalenderByMillis(jsonObject.getInt("date"));
+
+                    try {
+                        cId = jsonObject.getInt("cId");
+                        cuId = jsonObject.getInt("cuId");
+                        cuProfileImage = jsonObject.getString("cuProfileImage");
+                        cuName = jsonObject.getString("cuName");
+                        cContents = jsonObject.getString("cContents");
+                        cDate = Util.getCalenderByMillis(jsonObject.getInt("cDate"));
+                    } catch (JSONException e) {
+                        Log.d("haechilim", e.getMessage());
+                    }
+
+                    List<Comment> commentList = new ArrayList<>();
+                    commentList.add(new Comment(cId, new User(cuId, cuProfileImage, cuName), cContents, cDate));
+                    debateList.add(new Debate(id, new User(uId, uProfileImage, uName), title, category, contents, date, commentList));
+                }
+
+                callback.success(debateList);
             } catch (JSONException e) {
                 Log.d("haechilim", e.getMessage());
             }
@@ -114,8 +182,16 @@ public class ApiManager {
         void success(String json);
     }
 
+    public interface UserCallback {
+        void success(User user);
+    }
+
     public interface BestSellerCallback {
         void success(List<Book> bookList);
+    }
+
+    public interface DebateCallback {
+        void success(List<Debate> debateList);
     }
 
     public interface SuccessCallback {

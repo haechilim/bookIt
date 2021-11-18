@@ -1,6 +1,7 @@
 package com.example.bookit.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ import com.example.bookit.fragment.FragmentReadingDiary;
 import com.example.bookit.helper.Util;
 import com.example.bookit.manager.ApiManager;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
