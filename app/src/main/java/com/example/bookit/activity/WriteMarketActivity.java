@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -82,6 +83,10 @@ public class WriteMarketActivity extends AppCompatActivity {
 
     private void bindEvents() {
         findViewById(R.id.cancel).setOnClickListener(v -> {
+            Bitmap bitmap = ((BitmapDrawable)image1.getDrawable()).getBitmap();
+            ApiManager.test(bitmap);
+
+
             FragmentMarket.updateList();
             finish();
         });

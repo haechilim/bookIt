@@ -18,6 +18,7 @@ import com.example.bookit.R;
 import com.example.bookit.activity.DebateDetailActivity;
 import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.manager.ApiManager;
 import com.example.bookit.manager.DebateManager;
 import com.example.bookit.helper.Util;
 import com.example.bookit.view.UserView;
@@ -65,7 +66,7 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
     }
 
     private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
-        Glide.with(activity).load(debate.getUser().getProfileImage()).into((CircleImageView)view.findViewById(R.id.profileImage));
+        Glide.with(activity).load(ApiManager.HOST + debate.getUser().getProfileImage()).into((CircleImageView)view.findViewById(R.id.profileImage));
         ((TextView)view.findViewById(R.id.name)).setText(debate.getUser().getName());
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
         ((TextView)view.findViewById(R.id.title)).setText(debate.getTitle());

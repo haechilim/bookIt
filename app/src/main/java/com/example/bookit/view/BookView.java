@@ -16,6 +16,7 @@ import com.example.bookit.R;
 import com.example.bookit.activity.BookDetailActivity;
 import com.example.bookit.domain.Book;
 import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
 
 public class BookView extends LinearLayout {
     private Context context;

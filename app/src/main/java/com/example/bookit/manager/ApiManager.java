@@ -1,5 +1,7 @@
 package com.example.bookit.manager;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
 import com.example.bookit.domain.Book;
@@ -18,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,7 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ApiManager {
-    public static final String HOST = "http://10.0.2.2:9000";
+    public static final String HOST = "http://35.227.145.120:9000";
     private static User user;
 
     public static void login(String id, String password, LoginCallback callback) {
@@ -262,6 +265,75 @@ public class ApiManager {
         });
     }
 
+    public static void test(Bitmap bitmap) {
+        requestBinary(String.format("%s/%s", HOST, "api/test"), bitmap, json -> {
+            /*Log.d("haechilim", json);
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+        });
+    }
+
+    private static void requestBinary(String url, Bitmap bitmap, JsonCallback callback) {
+        Log.d("haechilim", url);
+
+        new AsyncJob<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                return requestBinary(strings[0], bitmap);
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                callback.success(result);
+            }
+        }.execute(url);
+    }
+
+    private static String requestBinary(String uri, Bitmap bitmap) {
+        String result = "";
+
+        try {
+            URL url = new URL(uri);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "image/jpeg");
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(encoded.getBytes("utf-8"));
+            outputStream.close();
+
+            connection.connect();
+
+            InputStream inputStream = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+            while(true) {
+                String line = reader.readLine();
+                if(line == null) break;
+                result += line;
+            }
+
+            reader.close();
+            connection.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
     private static void request(String url, String body, JsonCallback callback) {
         Log.d("haechilim", url);
 
@@ -288,8 +360,6 @@ public class ApiManager {
             if(!body.isEmpty()) {
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
-
-                Log.d("haechilim", connection.getRequestProperty("Content-Type"));
 
                 OutputStream outputStream = connection.getOutputStream();
                 Log.d("haechilim", body);
