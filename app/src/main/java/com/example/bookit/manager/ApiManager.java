@@ -193,6 +193,18 @@ public class ApiManager {
         });
     }
 
+    public static void writeComment(int debateId, String contents, SuccessCallback callback) {
+        contents = Util.encode(contents);
+
+        request(String.format("%s/%s", HOST, "api/write/comment"), String.format("userId=%d&debateId=%d&contents=%s", user.getId(), debateId, contents), json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public static void vote(int debateId, boolean isAgree, SuccessCallback callback) {
         request(String.format("%s/%s?userId=%d&debateId=%d&isAgree=%d", HOST, "api/vote", user.getId(), debateId, isAgree ? 1 : 0), "", json -> {
             try {

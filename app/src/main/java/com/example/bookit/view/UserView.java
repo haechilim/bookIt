@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.bookit.R;
 import com.example.bookit.domain.User;
+import com.example.bookit.manager.ApiManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,7 +48,7 @@ public class UserView extends LinearLayout {
         CircleImageView profileImage = view.findViewById(R.id.profileImage);
         TextView name = view.findViewById(R.id.name);
 
-        Glide.with(this).load(user.getProfileImage()).into(profileImage);
+        Glide.with(this).load(ApiManager.HOST + user.getProfileImage()).into(profileImage);
         name.setText(user.getName());
 
         view.setOnClickListener(v -> {

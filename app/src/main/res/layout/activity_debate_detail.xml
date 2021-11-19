@@ -24,113 +24,147 @@
         android:paddingRight="2dp"/>
   </LinearLayout>
 
-  <LinearLayout
+  <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:paddingLeft="18dp"
-      android:paddingRight="18dp"
-      android:orientation="vertical">
+      android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/userContainer"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/layout_border_bottom_debate_detail"
+            android:gravity="center_vertical"/>
 
       <LinearLayout
-          android:id="@+id/userContainer"
           android:layout_width="match_parent"
-          android:layout_height="80dp"
-          android:background="@drawable/layout_border_bottom_debate_detail"
-          android:gravity="center_vertical"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp">
-
-      <TextView
-          android:id="@+id/category"
-          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="분야:IT 컴퓨터"
-          android:textColor="#272727"
-          android:textSize="10sp"
-          android:textStyle="normal" />
+          android:orientation="vertical"
+          android:layout_marginTop="8dp">
 
-      <TextView
-          android:id="@+id/title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textStyle="normal"
-          android:textSize="18sp"
-          android:textColor="#272727"
-          android:text="메타버스에 대해서 어떻게 생각하세요?"
-          android:layout_marginBottom="4dp"/>
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="분야:IT 컴퓨터"
+            android:textColor="#272727"
+            android:textSize="10sp"
+            android:textStyle="normal" />
 
-      <TextView
-          android:id="@+id/contents"
-          android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="18sp"
+            android:textColor="#272727"
+            android:text="메타버스에 대해서 어떻게 생각하세요?"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#272727"
+            android:text="저는 메타버스가 코로나시대에 정말 좋은 순기능을 발휘할 거 같다고 생각해요 비대면이라는 한계점을 극복해줄 수 있는 좋은 기술이라고 생각해요.다들 어떻게 생각하는지 궁금하네요?긍정적이신지 부정적이신지... 긍정적이시면 찬성, 부정적이시면 반대 눌러주세요!"/>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:textStyle="normal"
-          android:textSize="14sp"
-          android:textColor="#272727"
-          android:text="저는 메타버스가 코로나시대에 정말 좋은 순기능을 발휘할 거 같다고 생각해요 비대면이라는 한계점을 극복해줄 수 있는 좋은 기술이라고 생각해요.다들 어떻게 생각하는지 궁금하네요?긍정적이신지 부정적이신지... 긍정적이시면 찬성, 부정적이시면 반대 눌러주세요!"/>
+          android:orientation="horizontal"
+          android:background="@drawable/layout_border_top_bottom"
+          android:layout_marginTop="24dp"
+          android:layout_marginBottom="18dp">
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_border_vote"/>
+
+        <TextView
+            android:id="@+id/agree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="찬성"
+            android:textColor="#272727"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_border_vote"/>
+
+        <TextView
+            android:id="@+id/disagree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="normal"
+            android:textSize="12sp"
+            android:textColor="#272727"
+            android:text="반대"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_border_vote"/>
+      </LinearLayout>
+
+      <ListView
+          android:id="@+id/commentsList"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:scrollbars="none"
+          android:overScrollMode="never"
+          android:divider="@null"
+          android:dividerHeight="0dp"
+          android:listSelector="@android:color/transparent"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
+        android:background="#f6f6f6"
         android:orientation="horizontal"
-        android:background="@drawable/layout_border_top_bottom"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="18dp">
+        android:layout_gravity="bottom"
+        android:gravity="center">
 
-      <LinearLayout
-          android:layout_width="1dp"
-          android:layout_height="match_parent"
-          android:background="@drawable/layout_border_vote"/>
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="310dp"
+            android:layout_height="30dp"
+            android:background="@drawable/layout_chatting_edit"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textStyle="normal"
+            android:textSize="12sp"
+            android:textColor="#aaaaaa"
+            android:hint="댓글 작성하기"
+            android:paddingLeft="18dp"
+            android:layout_marginRight="5dp"/>
 
-      <TextView
-          android:id="@+id/agree"
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_weight="1"
-          android:gravity="center"
-          android:paddingTop="5dp"
-          android:paddingBottom="5dp"
-          android:text="찬성"
-          android:textColor="#272727"
-          android:textSize="12sp"
-          android:textStyle="normal" />
-
-      <LinearLayout
-          android:layout_width="1dp"
-          android:layout_height="match_parent"
-          android:background="@drawable/layout_border_vote"/>
-
-      <TextView
-          android:id="@+id/disagree"
-          android:layout_width="0dp"
-          android:layout_height="match_parent"
-          android:layout_weight="1"
-          android:textStyle="normal"
-          android:textSize="12sp"
-          android:textColor="#272727"
-          android:text="반대"
-          android:gravity="center"
-          android:paddingTop="5dp"
-          android:paddingBottom="5dp"/>
-
-      <LinearLayout
-          android:layout_width="1dp"
-          android:layout_height="match_parent"
-          android:background="@drawable/layout_border_vote"/>
+        <ImageView
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_send_chatting"/>
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/commentsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:listSelector="@android:color/transparent"/>
-  </LinearLayout>
+  </FrameLayout>
 </LinearLayout>

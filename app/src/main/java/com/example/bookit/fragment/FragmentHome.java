@@ -18,7 +18,7 @@ import com.example.bookit.view.BookView;
 import java.util.List;
 
 public class FragmentHome extends Fragment {
-    public static final int BOOK_COUNT_PER_LIST = 15;
+    public static final int BOOK_COUNT_PER_LIST = 10;
 
     private LinearLayout recommendedItems;
 
