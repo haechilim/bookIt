@@ -1,13 +1,12 @@
 package com.example.bookit.manager;
 
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.example.bookit.domain.Book;
 import com.example.bookit.domain.Category;
 import com.example.bookit.domain.Comment;
 import com.example.bookit.domain.Debate;
+import com.example.bookit.domain.Market;
 import com.example.bookit.domain.ReadingDiary;
 import com.example.bookit.domain.StatusBook;
 import com.example.bookit.domain.User;
@@ -29,8 +28,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.sql.StatementEvent;
 
 public class ApiManager {
     public static final String HOST = "http://10.0.2.2:9000";
@@ -94,7 +91,6 @@ public class ApiManager {
             try {
                 List<Debate> debateList = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
-                Log.d("haechilim", jsonArray.getJSONObject(0).toString());
 
                 for(int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -113,7 +109,7 @@ public class ApiManager {
                     String cuName = "";
                     String cContents = "";
                     Calendar cDate = null;
-                    Calendar date = Util.getCalenderByMillis(jsonObject.getInt("date"));
+                    Calendar date = Util.getCalenderByMillis(jsonObject.getLong("date"));
 
                     try {
                         vIsAgree = jsonObject.getInt("vIsAgree");
@@ -122,7 +118,7 @@ public class ApiManager {
                         cuProfileImage = jsonObject.getString("cuProfileImage");
                         cuName = jsonObject.getString("cuName");
                         cContents = jsonObject.getString("cContents");
-                        cDate = Util.getCalenderByMillis(jsonObject.getInt("cDate"));
+                        cDate = Util.getCalenderByMillis(jsonObject.getLong("cDate"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -133,6 +129,35 @@ public class ApiManager {
                 }
 
                 callback.success(debateList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void getMarkets(MarketCallback callback) {
+        request(String.format("%s/%s", HOST, "api/market"), "", json -> {
+            try {
+                List<Market> marketList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(json);
+
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    int id = jsonObject.getInt("id");
+                    int uId = jsonObject.getInt("uId");
+                    String uProfileImage = jsonObject.getString("uProfileImage");
+                    String uName = jsonObject.getString("uName");
+                    String title = jsonObject.getString("title");
+                    Category category = Category.getCategoryById(jsonObject.getInt("categoryId"));
+                    StatusBook status = Market.STATUS_LIST[jsonObject.getInt("status")];
+                    int price = jsonObject.getInt("price");
+                    String contents = jsonObject.getString("contents");
+                    Calendar date = Util.getCalenderByMillis(jsonObject.getLong("date"));
+
+                    marketList.add(new Market(id, new User(uId, uProfileImage, uName), title, category, status, price, contents, date));
+                }
+
+                callback.success(marketList);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -316,6 +341,10 @@ public class ApiManager {
 
     public interface DebateCallback {
         void success(List<Debate> debateList);
+    }
+
+    public interface MarketCallback {
+        void success(List<Market> marketList);
     }
 
     public interface ReadingDiaryCallback {

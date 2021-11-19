@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.example.bookit.R;
-import com.example.bookit.domain.MarketBook;
+import com.example.bookit.domain.Market;
 import com.example.bookit.view.UserView;
 
 public class MarketDetailActivity extends AppCompatActivity {
-    private MarketBook marketBook;
+    private Market market;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +24,9 @@ public class MarketDetailActivity extends AppCompatActivity {
 
     private void init() {
         Intent intent = getIntent();
-        marketBook = (MarketBook) intent.getSerializableExtra("marketBook");
+        market = (Market) intent.getSerializableExtra("marketBook");
 
-        ((LinearLayout)findViewById(R.id.userContainer)).addView(new UserView(this, marketBook.getUser(), true));
+        ((LinearLayout)findViewById(R.id.userContainer)).addView(new UserView(this, market.getUser(), true));
     }
 
     private void bindEvents() {

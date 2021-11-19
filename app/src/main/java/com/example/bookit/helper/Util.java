@@ -2,6 +2,7 @@ package com.example.bookit.helper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -34,7 +35,7 @@ public class Util {
         context.startActivity(intent);
     }
 
-    public static Calendar getCalenderByMillis(int millis) {
+    public static Calendar getCalenderByMillis(long millis) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(millis);
 
