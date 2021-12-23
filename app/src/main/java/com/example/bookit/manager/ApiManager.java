@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ApiManager {
-    public static final String HOST = "http://35.227.145.120:9000";
+    public static final String HOST = "http://35.233.183.211:9000";
     private static User user;
 
     public static void login(String id, String password, LoginCallback callback) {
