@@ -3,6 +3,7 @@ package com.example.bookit.manager;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.example.bookit.domain.Book;
 import com.example.bookit.domain.Category;
@@ -161,6 +162,32 @@ public class ApiManager {
                 }
 
                 callback.success(marketList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void getComments(int debateId, CommentsCallback callback) {
+        request(String.format("%s/%s?id=%d", HOST, "api/comments", debateId), "", json -> {
+            try {
+                List<Comment> commentsList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(json);
+
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    int id = jsonObject.getInt("id");
+                    int uId = jsonObject.getInt("uId");
+                    String uProfileImage = jsonObject.getString("uProfileImage");
+                    String uName = jsonObject.getString("uName");
+                    String contents = jsonObject.getString("contents");
+                    Calendar date = Util.getCalenderByMillis(jsonObject.getLong("date"));
+
+                    commentsList.add(new Comment(id, new User(uId, uProfileImage, uName), contents, date));
+                }
+
+                callback.success(commentsList);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -427,6 +454,10 @@ public class ApiManager {
 
     public interface MarketCallback {
         void success(List<Market> marketList);
+    }
+
+    public interface CommentsCallback {
+        void success(List<Comment> commentList);
     }
 
     public interface ReadingDiaryCallback {

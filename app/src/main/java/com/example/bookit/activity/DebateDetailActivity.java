@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.bookit.R;
+import com.example.bookit.adapter.CommentListAdapter;
 import com.example.bookit.domain.Debate;
 import com.example.bookit.fragment.FragmentDebate;
 import com.example.bookit.helper.Util;
@@ -21,6 +23,7 @@ public class DebateDetailActivity extends AppCompatActivity {
     private TextView agree;
     private TextView disagree;
     private EditText edit;
+    private ListView commentsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class DebateDetailActivity extends AppCompatActivity {
         agree = findViewById(R.id.agree);
         disagree = findViewById(R.id.disagree);
         edit = findViewById(R.id.message);
+        commentsListView = findViewById(R.id.commentsList);
 
         ((LinearLayout)findViewById(R.id.userContainer)).addView(new UserView(this, debate.getUser(), true));
         ((TextView)findViewById(R.id.category)).setText("분야: " + debate.getCategory());
@@ -45,6 +49,8 @@ public class DebateDetailActivity extends AppCompatActivity {
 
         if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
         else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
+
+        updateComments();
     }
 
     private void bindEvents() {
@@ -62,12 +68,16 @@ public class DebateDetailActivity extends AppCompatActivity {
             else {
                 ApiManager.writeComment(debate.getId(), message, success -> {
                     if(success) {
-                        //TODO 리스트 갱신
+                        updateComments();
                         edit.setText("");
                     }
                     else Util.toast(this, "댓글을 작성 할 수 없습니다.", false);
                 });
             }
         });
+    }
+
+    private void updateComments() {
+        ApiManager.getComments(debate.getId(), (commentsList -> commentsListView.setAdapter(new CommentListAdapter(this, commentsList))));
     }
 }

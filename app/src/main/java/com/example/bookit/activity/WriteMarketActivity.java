@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.example.bookit.domain.Category;
 import com.example.bookit.domain.Market;
 import com.example.bookit.domain.StatusBook;
 import com.example.bookit.fragment.FragmentMarket;
+import com.example.bookit.helper.Util;
 import com.example.bookit.manager.ApiManager;
 
 import java.io.InputStream;
@@ -26,16 +28,14 @@ import java.io.InputStream;
 public class WriteMarketActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 0;
 
-    private ImageView image1;
-    private ImageView image2;
-    private ImageView image3;
-
     private EditText titleView;
     private Spinner categorySpinner;
     private Spinner statusSpinner;
     private EditText priceView;
     private EditText contentsView;
 
+    private ImageView[] imageViews = new ImageView[3];
+    private int currentImageViewIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,7 @@ public class WriteMarketActivity extends AppCompatActivity {
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
-                    Log.d("haechilim", img.toString());
-
-                    image1.setImageBitmap(img);
+                    addImage(img);
                 } catch (Exception e) {
                     e.getStackTrace();
                 }
@@ -67,9 +65,9 @@ public class WriteMarketActivity extends AppCompatActivity {
     }
 
     private void init() {
-        image1 = findViewById(R.id.image1);
-        image2 = findViewById(R.id.image2);
-        image3 = findViewById(R.id.image3);
+        imageViews[0] = findViewById(R.id.image1);
+        imageViews[1] = findViewById(R.id.image2);
+        imageViews[2] = findViewById(R.id.image3);
 
         titleView = findViewById(R.id.title);
         categorySpinner = findViewById(R.id.category);
@@ -83,15 +81,16 @@ public class WriteMarketActivity extends AppCompatActivity {
 
     private void bindEvents() {
         findViewById(R.id.cancel).setOnClickListener(v -> {
-            Bitmap bitmap = ((BitmapDrawable)image1.getDrawable()).getBitmap();
-            ApiManager.test(bitmap);
-
-
             FragmentMarket.updateList();
             finish();
         });
 
         findViewById(R.id.addImage).setOnClickListener(v -> {
+            if(currentImageViewIndex >= imageViews.length) {
+                Util.toast(this, "사진은 최대 3장만 업로드 할 수 있습니다.", false);
+                return;
+            }
+
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_CODE);
@@ -109,5 +108,12 @@ public class WriteMarketActivity extends AppCompatActivity {
                 finish();
             });
         });
+    }
+
+    private void addImage(Bitmap img) {
+        if(currentImageViewIndex < imageViews.length) {
+            imageViews[currentImageViewIndex].setImageBitmap(img);
+            imageViews[currentImageViewIndex++].setVisibility(View.VISIBLE);
+        }
     }
 }
