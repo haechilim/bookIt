@@ -3,13 +3,11 @@ package com.example.bookit.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -59,13 +57,13 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         TextView agree = view.findViewById(R.id.agree);
         TextView disagree = view.findViewById(R.id.disagree);
 
-        initDebate(view, debate, agree, disagree);
+        initDebateView(view, debate, agree, disagree);
         bindEvents(view, debate, agree, disagree);
 
         return view;
     }
 
-    private void initDebate(View view, Debate debate, TextView agree, TextView disagree) {
+    private void initDebateView(View view, Debate debate, TextView agree, TextView disagree) {
         Glide.with(activity).load(ApiManager.HOST + debate.getUser().getProfileImage()).into((CircleImageView)view.findViewById(R.id.profileImage));
         ((TextView)view.findViewById(R.id.name)).setText(debate.getUser().getName());
         ((TextView)view.findViewById(R.id.category)).setText("분야: " + debate.getCategory());
@@ -75,8 +73,10 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
         else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
 
-        if(!debate.getComments().isEmpty()) {
-            Comment comment = debate.getComments().get(0);
+        Log.d("haechilim", debate.getComment().toString());
+
+        if(!debate.getComment().getContents().isEmpty()) {
+            Comment comment = debate.getComment();
             ((LinearLayout) view.findViewById(R.id.userContainer)).addView(new UserView(activity, comment.getUser(), false));
             ((TextView)view.findViewById(R.id.contentsOfComment)).setText(comment.getContents());
         }

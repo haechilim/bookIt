@@ -116,20 +116,23 @@ public class ApiManager {
                     Calendar date = Util.getCalenderByMillis(jsonObject.getLong("date"));
 
                     try {
-                        vIsAgree = jsonObject.getInt("vIsAgree");
                         cId = jsonObject.getInt("cId");
                         cuId = jsonObject.getInt("cuId");
                         cuProfileImage = jsonObject.getString("cuProfileImage");
                         cuName = jsonObject.getString("cuName");
                         cContents = jsonObject.getString("cContents");
                         cDate = Util.getCalenderByMillis(jsonObject.getLong("cDate"));
+                        vIsAgree = jsonObject.getInt("vIsAgree");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    List<Comment> commentList = new ArrayList<>();
-                    commentList.add(new Comment(cId, new User(cuId, cuProfileImage, cuName), cContents, cDate));
-                    debateList.add(new Debate(id, new User(uId, uProfileImage, uName), title, category, contents, vIsAgree == 1, vIsAgree == 0, date, commentList));
+                    Log.d("haechilim", jsonObject.toString());
+                    Log.d("haechilim", cId + "");
+
+                    Comment comment = new Comment(cId, new User(cuId, cuProfileImage, cuName), cContents, cDate);
+                    User user = new User(uId, uProfileImage, uName);
+                    debateList.add(new Debate(id, user, title, category, contents, vIsAgree == 1, vIsAgree == 0, date, comment));
                 }
 
                 callback.success(debateList);

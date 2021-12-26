@@ -64,8 +64,7 @@ public class DebateDetailActivity extends AppCompatActivity {
         findViewById(R.id.sendButton).setOnClickListener(v -> {
             String message = edit.getText().toString().trim();
 
-            if(message.isEmpty()) return;
-            else {
+            if(!message.isEmpty()) {
                 ApiManager.writeComment(debate.getId(), message, success -> {
                     if(success) {
                         updateComments();

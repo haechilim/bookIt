@@ -13,9 +13,9 @@ public class Debate implements Serializable {
     private boolean agree;
     private boolean disagree;
     private Calendar calendar;
-    private List<Comment> comments;
+    private Comment comment;
 
-    public Debate(int id, User user, String title, Category category, String contents, boolean agree, boolean disagree, Calendar calendar, List<Comment> comments) {
+    public Debate(int id, User user, String title, Category category, String contents, boolean agree, boolean disagree, Calendar calendar, Comment comment) {
         this.id = id;
         this.user = user;
         this.title = title;
@@ -24,17 +24,17 @@ public class Debate implements Serializable {
         this.agree = agree;
         this.disagree = disagree;
         this.calendar = calendar;
-        this.comments = comments;
+        this.comment = comment;
     }
 
-    public Debate(int id, User user, String title, Category category, String contents, Calendar calendar, List<Comment> comments) {
+    public Debate(int id, User user, String title, Category category, String contents, Calendar calendar, Comment comment) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.category = category;
         this.contents = contents;
         this.calendar = calendar;
-        this.comments = comments;
+        this.comment = comment;
     }
 
     public Debate(int id, User user, String title, Category category, String contents) {
@@ -101,12 +101,12 @@ public class Debate implements Serializable {
         this.disagree = disagree;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public Comment getComment() {
+        return comment;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Debate implements Serializable {
                 ", agree=" + agree +
                 ", disagree=" + disagree +
                 ", calendar=" + calendar +
-                ", comments=" + comments +
+                ", comment=" + comment +
                 '}';
     }
 }
