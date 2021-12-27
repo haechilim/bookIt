@@ -97,15 +97,22 @@ public class WriteMarketActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.upload).setOnClickListener(v -> {
+            Bitmap bitmap = null;
+            if(imageViews[0].getDrawable() != null) bitmap = ((BitmapDrawable)imageViews[0].getDrawable()).getBitmap();
             String title = titleView.getText().toString().trim();
             Category category = (Category)categorySpinner.getSelectedItem();
             StatusBook status = (StatusBook)statusSpinner.getSelectedItem();
-            int price = Integer.parseInt(priceView.getText().toString().trim());
+            int price = priceView.getText().toString().trim().isEmpty() ? 0 : Integer.parseInt(priceView.getText().toString().trim());
             String contents = contentsView.getText().toString().trim();
 
-            ApiManager.writeMarket(title, category, status, price, contents, success -> FragmentMarket.updateList());
-
-            finish();
+            if(bitmap == null) Util.toast(this, "이미지를 업로드 해주세요.", true);
+            else if(title.isEmpty()) Util.toast(this, "제목을 입력해주세요.", true);
+            else if(price == 0) Util.toast(this, "가격을 입력해주세요.", true);
+            else if(contents.isEmpty()) Util.toast(this, "내용을 입력해주세요.", true);
+            else {
+                ApiManager.uploadMarketImage(bitmap, path -> ApiManager.writeMarket(path, title, category, status, price, contents, success -> FragmentMarket.updateList()));
+                finish();
+            }
         });
     }
 

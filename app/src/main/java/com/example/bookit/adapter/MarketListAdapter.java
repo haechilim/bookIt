@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bookit.R;
 import com.example.bookit.activity.MarketDetailActivity;
 import com.example.bookit.domain.Market;
 import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -56,6 +59,7 @@ public class MarketListAdapter extends BaseAdapter {
     }
 
     private void init(View view, Market market) {
+        Glide.with(activity).load(ApiManager.HOST + market.getImage()).into((ImageView) view.findViewById(R.id.image));
         ((TextView) view.findViewById(R.id.title)).setText(market.getTitle());
         ((TextView) view.findViewById(R.id.status)).setText(market.getStatus().getMessage());
         ((TextView) view.findViewById(R.id.price)).setText(Util.getPriceMessage(market.getPrice()));

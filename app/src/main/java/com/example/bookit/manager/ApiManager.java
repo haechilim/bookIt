@@ -154,6 +154,7 @@ public class ApiManager {
                     int uId = jsonObject.getInt("uId");
                     String uProfileImage = jsonObject.getString("uProfileImage");
                     String uName = jsonObject.getString("uName");
+                    String imageUrl = jsonObject.getString("imageUrl");
                     String title = jsonObject.getString("title");
                     Category category = Category.getCategoryById(jsonObject.getInt("categoryId"));
                     StatusBook status = Market.STATUS_LIST[jsonObject.getInt("status")];
@@ -161,7 +162,7 @@ public class ApiManager {
                     String contents = jsonObject.getString("contents");
                     Calendar date = Util.getCalenderByMillis(jsonObject.getLong("date"));
 
-                    marketList.add(new Market(id, new User(uId, uProfileImage, uName), title, category, status, price, contents, date));
+                    marketList.add(new Market(id, new User(uId, uProfileImage, uName), imageUrl, title, category, status, price, contents, date));
                 }
 
                 callback.success(marketList);
@@ -210,11 +211,11 @@ public class ApiManager {
         });
     }
 
-    public static void writeMarket(String title, Category category, StatusBook status, int price, String contents, SuccessCallback callback) {
+    public static void writeMarket(String imageUrl, String title, Category category, StatusBook status, int price, String contents, SuccessCallback callback) {
         title = Util.encode(title);
         contents = Util.encode(contents);
 
-        request(String.format("%s/%s", HOST, "api/write/market"), String.format("userId=%d&title=%s&category=%d&status=%d&price=%d&contents=%s", user.getId(), title, category.getId(), status.getStatus(), price, contents), json -> {
+        request(String.format("%s/%s", HOST, "api/write/market"), String.format("userId=%d&imageUrl=%s&title=%s&category=%d&status=%d&price=%d&contents=%s", user.getId(), imageUrl, title, category.getId(), status.getStatus(), price, contents), json -> {
             Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
@@ -308,14 +309,14 @@ public class ApiManager {
         });
     }
 
-    public static void test(Bitmap bitmap) {
-        requestBinary(String.format("%s/%s", HOST, "api/test"), bitmap, json -> {
-            /*Log.d("haechilim", json);
+    public static void uploadMarketImage(Bitmap bitmap, PathCallback callback) {
+        requestBinary(String.format("%s/%s", HOST, "upload/market/image"), bitmap, json -> {
+            Log.d("haechilim", json);
             try {
-                callback.success(new JSONObject(json).getBoolean("success"));
+                callback.success(new JSONObject(json).getString("path"));
             } catch (JSONException e) {
                 e.printStackTrace();
-            }*/
+            }
         });
     }
 
@@ -470,5 +471,9 @@ public class ApiManager {
 
     public interface SuccessCallback {
         void success(boolean success);
+    }
+
+    public interface PathCallback {
+        void success(String path);
     }
 }
