@@ -74,6 +74,7 @@
                         android:layout_marginTop="8dp">
 
                         <TextView
+                            android:id="@+id/status"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:textStyle="normal"
@@ -88,6 +89,7 @@
                             android:layout_weight="1"/>
 
                         <TextView
+                            android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:textStyle="normal"
@@ -119,6 +121,7 @@
                 android:layout_gravity="bottom">
 
                 <TextView
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="27dp"
                     android:textStyle="normal"

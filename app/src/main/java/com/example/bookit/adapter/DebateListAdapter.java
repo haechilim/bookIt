@@ -73,8 +73,6 @@ public class DebateListAdapter extends BaseAdapter implements Serializable {
         if(debate.isAgree()) DebateManager.clickedVoteButton(agree);
         else if(debate.isDisagree()) DebateManager.clickedVoteButton(disagree);
 
-        Log.d("haechilim", debate.getComment().toString());
-
         if(!debate.getComment().getContents().isEmpty()) {
             Comment comment = debate.getComment();
             ((LinearLayout) view.findViewById(R.id.userContainer)).addView(new UserView(activity, comment.getUser(), false));

@@ -103,10 +103,9 @@ public class WriteMarketActivity extends AppCompatActivity {
             int price = Integer.parseInt(priceView.getText().toString().trim());
             String contents = contentsView.getText().toString().trim();
 
-            ApiManager.writeMarket(title, category, status, price, contents, success -> {
-                FragmentMarket.updateList();
-                finish();
-            });
+            ApiManager.writeMarket(title, category, status, price, contents, success -> FragmentMarket.updateList());
+
+            finish();
         });
     }
 

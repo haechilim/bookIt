@@ -215,6 +215,7 @@ public class ApiManager {
         contents = Util.encode(contents);
 
         request(String.format("%s/%s", HOST, "api/write/market"), String.format("userId=%d&title=%s&category=%d&status=%d&price=%d&contents=%s", user.getId(), title, category.getId(), status.getStatus(), price, contents), json -> {
+            Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getBoolean("success"));
             } catch (JSONException e) {

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class Util {
@@ -49,5 +50,20 @@ public class Util {
         }
 
         return "";
+    }
+
+    public static String getDateMessage(Calendar calendar) {
+        long subTime = Calendar.getInstance().getTimeInMillis() - calendar.getTimeInMillis();
+
+        if(subTime < 60000) return "방금 전";
+        else if(subTime < 3600000) return subTime / 60000 + "분 전";
+        else if(subTime < 86400000) return subTime / 3600000 + "시간 전";
+        else if(subTime < 2592000000L) return subTime / 86400000 + "일 전";
+        else if(subTime < 31104000000L) return subTime / 2592000000L + "달 전";
+        else return subTime / 31104000000L + "년 전";
+    }
+
+    public static String getPriceMessage(int price) {
+        return new DecimalFormat("###,### 원").format(price);
     }
 }
