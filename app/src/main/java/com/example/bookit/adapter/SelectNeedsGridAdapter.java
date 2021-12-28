@@ -53,6 +53,7 @@ public class SelectNeedsGridAdapter extends BaseAdapter {
     private void initView(View view, Category category) {
         ((ImageView)view.findViewById(R.id.image)).setImageResource(activity.getResources().getIdentifier("ex_book" + category.getId(), "drawable", activity.getPackageName()));
         ((TextView)view.findViewById(R.id.category)).setText(category.getName());
+        view.findViewById(R.id.selected).setVisibility(selectedCategories.contains(category) ? View.VISIBLE : View.GONE);
     }
 
     private void bindEvents(View view, Category category) {
