@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookIt"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SignupCompleatActivity"></activity>
+        <activity android:name=".activity.SelectNeedsActivity"></activity>
+        <activity android:name=".activity.SignupCompleatActivity" />
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.ReadingDiaryDetailActivity" />

@@ -16,6 +16,8 @@ import com.example.bookit.R;
 import com.example.bookit.helper.Util;
 import com.example.bookit.manager.ApiManager;
 
+import java.util.regex.Pattern;
+
 public class SignupActivity extends AppCompatActivity {
     public static final int INPUT_MODE_NAME = 0;
     public static final int INPUT_MODE_ID = 1;
@@ -53,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
         else if(inputMode == INPUT_MODE_PASSWORD) inputMode = INPUT_MODE_PASSWORD_CHECK;
         else if(inputMode == INPUT_MODE_PASSWORD_CHECK) {
             ApiManager.signup(inputs[INPUT_MODE_NAME], inputs[INPUT_MODE_ID], inputs[INPUT_MODE_PASSWORD], success -> {
-                if(success) Util.startActivity(this, SignupCompleatActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                if(success) Util.startActivity(this, SelectNeedsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 else Util.toast(this, "사용이 불가능한 아이디 입니다.", false);
             });
         }
