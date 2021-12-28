@@ -2,13 +2,11 @@ package com.example.bookit.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -110,7 +108,7 @@ public class WriteMarketActivity extends AppCompatActivity {
             else if(price == 0) Util.toast(this, "가격을 입력해주세요.", true);
             else if(contents.isEmpty()) Util.toast(this, "내용을 입력해주세요.", true);
             else {
-                ApiManager.uploadMarketImage(bitmap, path -> ApiManager.writeMarket(path, title, category, status, price, contents, success -> FragmentMarket.updateList()));
+                ApiManager.uploadImage(bitmap, path -> ApiManager.writeMarket(path, title, category, status, price, contents, success -> FragmentMarket.updateList()));
                 finish();
             }
         });

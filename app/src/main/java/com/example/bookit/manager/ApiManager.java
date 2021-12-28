@@ -261,6 +261,16 @@ public class ApiManager {
         });
     }
 
+    public static void editProfile(String imageUrl, String name, SuccessCallback callback) {
+        request(String.format("%s/%s?userId=%d&imageUrl=%s&name=%s", HOST, "api/edit/profile", user.getId(), imageUrl, name), "", json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public static void vote(int debateId, boolean isAgree, SuccessCallback callback) {
         request(String.format("%s/%s?userId=%d&debateId=%d&isAgree=%d", HOST, "api/vote", user.getId(), debateId, isAgree ? 1 : 0), "", json -> {
             try {
@@ -333,8 +343,8 @@ public class ApiManager {
         });
     }
 
-    public static void uploadMarketImage(Bitmap bitmap, PathCallback callback) {
-        requestBinary(String.format("%s/%s", HOST, "upload/market/image"), bitmap, json -> {
+    public static void uploadImage(Bitmap bitmap, PathCallback callback) {
+        requestBinary(String.format("%s/%s", HOST, "upload/image"), bitmap, json -> {
             Log.d("haechilim", json);
             try {
                 callback.success(new JSONObject(json).getString("path"));
