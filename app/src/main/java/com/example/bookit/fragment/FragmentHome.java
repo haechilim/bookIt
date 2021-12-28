@@ -28,17 +28,32 @@ public class FragmentHome extends Fragment {
 
         recommendedItems = view.findViewById(R.id.recommendedItems);
 
-        addRecommendedContainer(inflater, ApiManager.getUser().getName() + "님을 위한 추천 도서");
-        addRecommendedContainer(inflater, "베스트 도서");
+        addRecommendedContainer(inflater);
+        addBestSellerContainer(inflater);
 
         return view;
     }
 
-    private void addRecommendedContainer(LayoutInflater inflater, String title) {
+    private void addRecommendedContainer(LayoutInflater inflater) {
         View recommendedBook = inflater.inflate(R.layout.layout_recommended_item, recommendedItems, false);
         LinearLayout itemsContainer = recommendedBook.findViewById(R.id.itemsContainer);
 
-        ((TextView) recommendedBook.findViewById(R.id.title)).setText(title);
+        ((TextView) recommendedBook.findViewById(R.id.title)).setText(ApiManager.getUser().getName() + "님을 위한 추천 도서");
+
+        ApiManager.recommendedBooks(BOOK_COUNT_PER_LIST, (bookList) -> {
+            for(int i = 0; i < bookList.size(); i++) {
+                itemsContainer.addView(new BookView(getContext(), bookList.get(i)));
+            }
+        });
+
+        recommendedItems.addView(recommendedBook);
+    }
+
+    private void addBestSellerContainer(LayoutInflater inflater) {
+        View recommendedBook = inflater.inflate(R.layout.layout_recommended_item, recommendedItems, false);
+        LinearLayout itemsContainer = recommendedBook.findViewById(R.id.itemsContainer);
+
+        ((TextView) recommendedBook.findViewById(R.id.title)).setText("베스트 도서");
 
         ApiManager.bestSeller(BOOK_COUNT_PER_LIST, (bookList) -> {
             for(int i = 0; i < bookList.size(); i++) {

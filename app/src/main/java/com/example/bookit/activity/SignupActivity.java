@@ -55,7 +55,12 @@ public class SignupActivity extends AppCompatActivity {
         else if(inputMode == INPUT_MODE_PASSWORD) inputMode = INPUT_MODE_PASSWORD_CHECK;
         else if(inputMode == INPUT_MODE_PASSWORD_CHECK) {
             ApiManager.signup(inputs[INPUT_MODE_NAME], inputs[INPUT_MODE_ID], inputs[INPUT_MODE_PASSWORD], success -> {
-                if(success) Util.startActivity(this, SelectNeedsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                if(success) {
+                    Intent intent = new Intent(this, SelectNeedsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("loginId", inputs[1]);
+                    startActivity(intent);
+                }
                 else Util.toast(this, "사용이 불가능한 아이디 입니다.", false);
             });
         }

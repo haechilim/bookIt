@@ -4,19 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 
 import com.example.bookit.R;
 import com.example.bookit.adapter.SelectNeedsGridAdapter;
 import com.example.bookit.domain.Category;
 import com.example.bookit.helper.Util;
+import com.example.bookit.manager.ApiManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SelectNeedsActivity extends AppCompatActivity {
     private List<Category> selectedCategories = new ArrayList<>();
-
+    private String loginId;
     private GridView selectNeedsGrid;
 
     @Override
@@ -30,6 +32,7 @@ public class SelectNeedsActivity extends AppCompatActivity {
 
     private void init() {
         selectNeedsGrid = findViewById(R.id.selectNeedsGrid);
+        loginId = getIntent().getStringExtra("loginId");
 
         selectNeedsGrid.setAdapter(new SelectNeedsGridAdapter(this, selectedCategories));
     }
@@ -41,7 +44,13 @@ public class SelectNeedsActivity extends AppCompatActivity {
                 return;
             }
 
-            Util.startActivity(this, SignupCompleatActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            for(int i = 0; i < selectedCategories.size(); i++) {
+                Category category = selectedCategories.get(i);
+
+                ApiManager.selectNeeds(loginId, category, success -> {
+                    if(selectedCategories.get(selectedCategories.size() - 1) == category) Util.startActivity(this, SignupCompleatActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                });
+            }
         });
     }
 }

@@ -3,7 +3,6 @@ package com.example.bookit.manager;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.ListView;
 
 import com.example.bookit.domain.Book;
 import com.example.bookit.domain.Category;
@@ -72,8 +71,36 @@ public class ApiManager {
         });
     }
 
-    public static void bestSeller(int count, BestSellerCallback callback) {
+    public static void selectNeeds(String loginId, Category category, SuccessCallback callback) {
+        request(String.format("%s/%s?loginId=%s&categoryId=%d", HOST, "api/selectNeeds", loginId, category.getId()), "", json -> {
+            try {
+                callback.success(new JSONObject(json).getBoolean("success"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void bestSeller(int count, BooksCallback callback) {
         request(String.format("%s/%s?count=%d", HOST, "api/bestSeller", count), "", json -> {
+            try {
+                List<Book> booksLit = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(json);
+
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    booksLit.add(new Book(jsonObject.getString("coverLargeUrl"), jsonObject.getString("title"), jsonObject.getString("author"), jsonObject.getString("publisher"), jsonObject.getInt("categoryId"), jsonObject.getString("description")));
+                }
+
+                callback.success(booksLit);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public static void recommendedBooks(int count, BooksCallback callback) {
+        request(String.format("%s/%s?userId=%d&count=%d", HOST, "api/recommendedBooks", user.getId(), count), "", json -> {
             try {
                 List<Book> booksLit = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray(json);
@@ -126,9 +153,6 @@ public class ApiManager {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    Log.d("haechilim", jsonObject.toString());
-                    Log.d("haechilim", cId + "");
 
                     Comment comment = new Comment(cId, new User(cuId, cuProfileImage, cuName), cContents, cDate);
                     User user = new User(uId, uProfileImage, uName);
@@ -449,7 +473,7 @@ public class ApiManager {
         void success(User user);
     }
 
-    public interface BestSellerCallback {
+    public interface BooksCallback {
         void success(List<Book> bookList);
     }
 
