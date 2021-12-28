@@ -195,7 +195,8 @@
                     android:orientation="horizontal"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:background="@drawable/layout_border_bottom_my">
+                    android:background="@drawable/layout_border_bottom_my"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -261,7 +262,8 @@
                     android:orientation="horizontal"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:background="@drawable/layout_border_bottom_my">
+                    android:background="@drawable/layout_border_bottom_my"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
