@@ -141,7 +141,8 @@
                     android:textColor="#ffffff"
                     android:background="@drawable/layout_button_market_detail"
                     android:elevation="10dp"
-                    android:text="채팅하기"/>
+                    android:text="채팅하기"
+                    android:visibility="invisible"/>
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>

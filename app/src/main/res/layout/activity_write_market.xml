@@ -148,7 +148,7 @@
             android:id="@+id/contents"
             android:layout_width="match_parent"
             android:layout_height="203dp"
-            android:hint="게시글 내용 작성"
+            android:hint="게시글 내용 작성 (연락처나 카톡 ID 등 연락 수단을 적어주세요.)"
             android:textSize="16sp"
             android:background="#efefef"
             android:paddingTop="10dp"
